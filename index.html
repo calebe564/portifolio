@@ -1,0 +1,543 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Calebe — Portfólio de Landing Pages</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,600;0,700;1,500&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+
+  /* ============================================
+     CONFIGURAÇÃO DE PROJETOS
+     ============================================
+     Pra adicionar um projeto novo:
+     1. Coloque o arquivo .html dentro de /projetos/entregues/ ou /projetos/demos/
+     2. Adicione um objeto novo no array correspondente abaixo
+     3. Salve e atualize a página no navegador
+
+     Campos:
+     - titulo: nome do projeto
+     - cliente: nome do cliente ou nicho
+     - tags: lista de palavras-chave (tecnologias, estilo etc)
+     - arquivo: caminho relativo do .html dentro da pasta projetos/
+     - descricao: 1-2 frases sobre o que foi feito
+  ============================================ */
+
+  :root{
+    --bg: #0B0D10;
+    --bg-elevated: #14171C;
+    --bg-card: #15181D;
+    --border: #232831;
+    --text: #E8E6E1;
+    --text-dim: #9a978f;
+    --text-faint: #65625c;
+    --gold: #C9A84C;
+    --gold-dim: #8a7438;
+    --green: #2C8C6F;
+    --green-dim: #1d5c49;
+  }
+
+  *{box-sizing:border-box;margin:0;padding:0}
+
+  body{
+    background:var(--bg);
+    color:var(--text);
+    font-family:'Inter', system-ui, sans-serif;
+    line-height:1.5;
+    -webkit-font-smoothing:antialiased;
+  }
+
+  /* textura de fundo sutil */
+  body::before{
+    content:'';
+    position:fixed;
+    inset:0;
+    background-image:
+      radial-gradient(circle at 15% 10%, rgba(201,168,76,0.06), transparent 40%),
+      radial-gradient(circle at 85% 90%, rgba(44,140,111,0.05), transparent 40%);
+    pointer-events:none;
+    z-index:0;
+  }
+
+  a{color:inherit;text-decoration:none}
+
+  /* ===== HERO ===== */
+  .hero{
+    position:relative;
+    z-index:1;
+    padding:7rem 2rem 5rem;
+    max-width:1100px;
+    margin:0 auto;
+    border-bottom:1px solid var(--border);
+  }
+
+  .eyebrow{
+    font-size:0.78rem;
+    letter-spacing:0.18em;
+    text-transform:uppercase;
+    color:var(--gold);
+    font-weight:600;
+    margin-bottom:1.5rem;
+    display:flex;
+    align-items:center;
+    gap:0.6rem;
+  }
+  .eyebrow::before{
+    content:'';
+    width:6px;height:6px;
+    background:var(--gold);
+    border-radius:50%;
+    display:inline-block;
+  }
+
+  .hero h1{
+    font-family:'Playfair Display', serif;
+    font-weight:600;
+    font-size:clamp(2.5rem, 6vw, 4.5rem);
+    line-height:1.05;
+    letter-spacing:-0.01em;
+    max-width:850px;
+    color:var(--text);
+  }
+  .hero h1 em{
+    font-style:italic;
+    color:var(--gold);
+    font-weight:500;
+  }
+
+  .hero p.lede{
+    margin-top:1.8rem;
+    font-size:1.15rem;
+    color:var(--text-dim);
+    max-width:560px;
+    line-height:1.6;
+  }
+
+  .hero-stats{
+    display:flex;
+    gap:2.5rem;
+    margin-top:3rem;
+    flex-wrap:wrap;
+  }
+  .stat{
+    border-left:2px solid var(--border);
+    padding-left:1rem;
+  }
+  .stat .num{
+    font-family:'Playfair Display', serif;
+    font-size:1.8rem;
+    color:var(--gold);
+    display:block;
+    line-height:1;
+  }
+  .stat .label{
+    font-size:0.82rem;
+    color:var(--text-faint);
+    margin-top:0.3rem;
+    display:block;
+  }
+
+  /* ===== SECTIONS ===== */
+  .section{
+    position:relative;
+    z-index:1;
+    max-width:1100px;
+    margin:0 auto;
+    padding:4.5rem 2rem;
+  }
+
+  .section-head{
+    display:flex;
+    justify-content:space-between;
+    align-items:baseline;
+    margin-bottom:2.5rem;
+    flex-wrap:wrap;
+    gap:1rem;
+  }
+
+  .section-head h2{
+    font-family:'Playfair Display', serif;
+    font-size:2rem;
+    font-weight:600;
+  }
+
+  .section-head .tag-pill{
+    font-size:0.75rem;
+    letter-spacing:0.1em;
+    text-transform:uppercase;
+    font-weight:600;
+    padding:0.4rem 0.9rem;
+    border-radius:100px;
+    border:1px solid currentColor;
+  }
+
+  .entregues .section-head .tag-pill{ color:var(--gold); }
+  .demos .section-head .tag-pill{ color:var(--green); }
+
+  .section-head p.desc{
+    color:var(--text-faint);
+    font-size:0.95rem;
+    max-width:480px;
+    margin-top:0.5rem;
+  }
+
+  .demos{
+    background:linear-gradient(180deg, rgba(44,140,111,0.04), transparent);
+    border-top:1px solid var(--border);
+    border-bottom:1px solid var(--border);
+  }
+
+  /* ===== GRID & CARDS ===== */
+  .grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fill, minmax(300px, 1fr));
+    gap:1.5rem;
+  }
+
+  .card{
+    background:var(--bg-card);
+    border:1px solid var(--border);
+    border-radius:10px;
+    overflow:hidden;
+    cursor:pointer;
+    transition:border-color 0.25s ease, transform 0.25s ease;
+    display:flex;
+    flex-direction:column;
+  }
+  .card:hover{
+    border-color:var(--gold-dim);
+    transform:translateY(-3px);
+  }
+  .demos .card:hover{
+    border-color:var(--green-dim);
+  }
+  .card:focus-visible{
+    outline:2px solid var(--gold);
+    outline-offset:2px;
+  }
+
+  .card-preview{
+    height:200px;
+    background:#070809;
+    position:relative;
+    overflow:hidden;
+    border-bottom:1px solid var(--border);
+  }
+  .card-preview iframe{
+    width:400%;
+    height:400%;
+    transform:scale(0.25);
+    transform-origin:top left;
+    border:none;
+    pointer-events:none;
+  }
+  .card-preview .overlay{
+    position:absolute;
+    inset:0;
+    background:linear-gradient(180deg, transparent 60%, rgba(0,0,0,0.5));
+    display:flex;
+    align-items:flex-end;
+    justify-content:flex-end;
+    padding:0.7rem;
+    opacity:0;
+    transition:opacity 0.2s ease;
+  }
+  .card:hover .overlay{ opacity:1; }
+  .overlay span{
+    font-size:0.72rem;
+    letter-spacing:0.05em;
+    text-transform:uppercase;
+    background:rgba(0,0,0,0.6);
+    padding:0.3rem 0.6rem;
+    border-radius:5px;
+    color:var(--text);
+  }
+
+  .card-body{
+    padding:1.2rem 1.3rem 1.4rem;
+    flex:1;
+    display:flex;
+    flex-direction:column;
+  }
+  .card-body .client{
+    font-size:0.75rem;
+    color:var(--text-faint);
+    text-transform:uppercase;
+    letter-spacing:0.08em;
+    margin-bottom:0.4rem;
+  }
+  .card-body h3{
+    font-family:'Playfair Display', serif;
+    font-size:1.25rem;
+    font-weight:600;
+    margin-bottom:0.5rem;
+  }
+  .card-body .desc{
+    font-size:0.88rem;
+    color:var(--text-dim);
+    flex:1;
+    line-height:1.5;
+  }
+  .card-body .tags{
+    display:flex;
+    gap:0.4rem;
+    flex-wrap:wrap;
+    margin-top:1rem;
+  }
+  .card-body .tags span{
+    font-size:0.7rem;
+    color:var(--text-faint);
+    background:var(--bg-elevated);
+    padding:0.25rem 0.55rem;
+    border-radius:5px;
+    border:1px solid var(--border);
+  }
+
+  .empty-state{
+    border:1px dashed var(--border);
+    border-radius:10px;
+    padding:3rem 2rem;
+    text-align:center;
+    color:var(--text-faint);
+    grid-column:1/-1;
+  }
+
+  /* ===== MODAL ===== */
+  .modal-backdrop{
+    position:fixed;
+    inset:0;
+    background:rgba(5,6,7,0.85);
+    backdrop-filter:blur(4px);
+    z-index:100;
+    display:none;
+    align-items:center;
+    justify-content:center;
+    padding:2rem;
+  }
+  .modal-backdrop.open{ display:flex; }
+
+  .modal{
+    background:var(--bg-elevated);
+    border:1px solid var(--border);
+    border-radius:12px;
+    width:100%;
+    max-width:1200px;
+    height:85vh;
+    display:flex;
+    flex-direction:column;
+    overflow:hidden;
+  }
+  .modal-bar{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    padding:0.9rem 1.3rem;
+    border-bottom:1px solid var(--border);
+  }
+  .modal-bar .info{
+    font-size:0.85rem;
+    color:var(--text-dim);
+  }
+  .modal-bar .info strong{ color:var(--text); }
+  .modal-bar .actions{
+    display:flex;
+    gap:0.6rem;
+  }
+  .modal-bar button, .modal-bar a{
+    font-family:'Inter', sans-serif;
+    font-size:0.82rem;
+    background:var(--bg-card);
+    color:var(--text-dim);
+    border:1px solid var(--border);
+    padding:0.45rem 0.9rem;
+    border-radius:6px;
+    cursor:pointer;
+    transition:color 0.2s, border-color 0.2s;
+  }
+  .modal-bar button:hover, .modal-bar a:hover{
+    color:var(--text);
+    border-color:var(--gold-dim);
+  }
+  .modal iframe{
+    width:100%;
+    height:100%;
+    border:none;
+    background:#fff;
+  }
+
+  /* ===== FOOTER ===== */
+  footer{
+    text-align:center;
+    padding:3rem 2rem 4rem;
+    color:var(--text-faint);
+    font-size:0.85rem;
+    position:relative;
+    z-index:1;
+  }
+
+  @media (prefers-reduced-motion: reduce){
+    .card{ transition:none; }
+  }
+
+  @media (max-width:640px){
+    .hero{ padding:4.5rem 1.2rem 3rem; }
+    .section{ padding:3rem 1.2rem; }
+    .hero-stats{ gap:1.5rem; }
+  }
+</style>
+</head>
+<body>
+
+<header class="hero">
+  <div class="eyebrow">Calebe · Belo Horizonte</div>
+  <h1>Landing pages que <em>vendem</em>,<br>não só decoram.</h1>
+  <p class="lede">Acervo de projetos entregues a clientes reais e demonstrações usadas pra prospecção — tudo construído, sem mockup.</p>
+  <div class="hero-stats">
+    <div class="stat">
+      <span class="num" id="stat-entregues">0</span>
+      <span class="label">Projetos entregues</span>
+    </div>
+    <div class="stat">
+      <span class="num" id="stat-demos">0</span>
+      <span class="label">Demos de prospecção</span>
+    </div>
+  </div>
+</header>
+
+<section class="section entregues">
+  <div class="section-head">
+    <div>
+      <h2>Entregues</h2>
+      <p class="desc">Landing pages finalizadas e publicadas para clientes pagantes.</p>
+    </div>
+    <span class="tag-pill">Cliente real</span>
+  </div>
+  <div class="grid" id="grid-entregues"></div>
+</section>
+
+<section class="section demos">
+  <div class="section-head">
+    <div>
+      <h2>Demonstrações</h2>
+      <p class="desc">Páginas geradas para prospectar negócios locais sem site, enviadas via WhatsApp.</p>
+    </div>
+    <span class="tag-pill">Pitch</span>
+  </div>
+  <div class="grid" id="grid-demos"></div>
+</section>
+
+<footer>Portfólio pessoal — atualizado manualmente em <code>index.html</code></footer>
+
+<div class="modal-backdrop" id="modal">
+  <div class="modal">
+    <div class="modal-bar">
+      <div class="info">Visualizando: <strong id="modal-title">—</strong></div>
+      <div class="actions">
+        <a id="modal-open" href="#" target="_blank" rel="noopener">Abrir em nova aba</a>
+        <button id="modal-close">Fechar ✕</button>
+      </div>
+    </div>
+    <iframe id="modal-iframe" src=""></iframe>
+  </div>
+</div>
+
+<script>
+  // ============================================
+  // SEUS PROJETOS — edite estas duas listas
+  // ============================================
+
+  const entregues = [
+    {
+      titulo: "Facial Harmonização",
+      cliente: "Dra. Grécia de Deus",
+      descricao: "Landing premium com edição de fotos, CTA editorial e dados reais da clínica.",
+      arquivo: "projetos/entregues/exemplo-clinica.html",
+      tags: ["Editorial", "Saúde", "Premium"]
+    }
+  ];
+
+  const demos = [
+    {
+      titulo: "Demo — Prospector BH",
+      cliente: "Negócio sem site (exemplo)",
+      descricao: "Página gerada automaticamente para pitch via WhatsApp.",
+      arquivo: "projetos/demos/exemplo-demo.html",
+      tags: ["Prospecção", "Tier Médio"]
+    }
+  ];
+
+  // ============================================
+  // Lógica de renderização — não precisa editar abaixo
+  // ============================================
+
+  function renderCards(lista, containerId){
+    const container = document.getElementById(containerId);
+    if(lista.length === 0){
+      container.innerHTML = `<div class="empty-state">Nenhum projeto adicionado ainda. Edite o array correspondente no &lt;script&gt; do index.html.</div>`;
+      return;
+    }
+    container.innerHTML = lista.map((p, i) => `
+      <div class="card" tabindex="0" role="button" data-list="${containerId}" data-index="${i}">
+        <div class="card-preview">
+          <iframe src="${p.arquivo}" loading="lazy" tabindex="-1"></iframe>
+          <div class="overlay"><span>Ver projeto</span></div>
+        </div>
+        <div class="card-body">
+          <div class="client">${p.cliente}</div>
+          <h3>${p.titulo}</h3>
+          <p class="desc">${p.descricao}</p>
+          <div class="tags">${p.tags.map(t => `<span>${t}</span>`).join('')}</div>
+        </div>
+      </div>
+    `).join('');
+  }
+
+  renderCards(entregues, 'grid-entregues');
+  renderCards(demos, 'grid-demos');
+
+  document.getElementById('stat-entregues').textContent = entregues.length;
+  document.getElementById('stat-demos').textContent = demos.length;
+
+  // Modal
+  const modal = document.getElementById('modal');
+  const modalIframe = document.getElementById('modal-iframe');
+  const modalTitle = document.getElementById('modal-title');
+  const modalOpen = document.getElementById('modal-open');
+
+  function openModal(projeto){
+    modalIframe.src = projeto.arquivo;
+    modalTitle.textContent = `${projeto.titulo} — ${projeto.cliente}`;
+    modalOpen.href = projeto.arquivo;
+    modal.classList.add('open');
+  }
+
+  function closeModal(){
+    modal.classList.remove('open');
+    modalIframe.src = '';
+  }
+
+  document.body.addEventListener('click', (e) => {
+    const card = e.target.closest('.card');
+    if(card){
+      const lista = card.dataset.list === 'grid-entregues' ? entregues : demos;
+      openModal(lista[card.dataset.index]);
+    }
+  });
+
+  document.body.addEventListener('keydown', (e) => {
+    const card = e.target.closest('.card');
+    if(card && (e.key === 'Enter' || e.key === ' ')){
+      e.preventDefault();
+      const lista = card.dataset.list === 'grid-entregues' ? entregues : demos;
+      openModal(lista[card.dataset.index]);
+    }
+    if(e.key === 'Escape') closeModal();
+  });
+
+  document.getElementById('modal-close').addEventListener('click', closeModal);
+  modal.addEventListener('click', (e) => { if(e.target === modal) closeModal(); });
+</script>
+
+</body>
+</html>
