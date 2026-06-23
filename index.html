@@ -188,6 +188,10 @@
     border-bottom:1px solid var(--border);
   }
 
+  /* Seção "Entregues" oculta por enquanto — remova esta regra quando
+     quiser exibi-la novamente (depois de trocar o arquivo placeholder) */
+  .entregues{ display:none; }
+
   /* ===== GRID & CARDS ===== */
   .grid{
     display:grid;
@@ -395,10 +399,6 @@
   <p class="lede">Acervo de projetos entregues a clientes reais e demonstrações usadas pra prospecção — tudo construído, sem mockup.</p>
   <div class="hero-stats">
     <div class="stat">
-      <span class="num" id="stat-entregues">0</span>
-      <span class="label">Projetos entregues</span>
-    </div>
-    <div class="stat">
       <span class="num" id="stat-demos">0</span>
       <span class="label">Demos de prospecção</span>
     </div>
@@ -531,7 +531,6 @@
   renderCards(entregues, 'grid-entregues');
   renderCards(demos, 'grid-demos');
 
-  document.getElementById('stat-entregues').textContent = entregues.length;
   document.getElementById('stat-demos').textContent = demos.length;
 
   // Modal
