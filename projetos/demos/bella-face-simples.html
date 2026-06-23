@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Clínica Bella Face — Botox e Preenchimento em BH</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#FFFFFF; --bg-soft:#FBF5F7; --pink:#E85D8A; --pink-dark:#C2406B;
+    --ink:#241B22; --ink-dim:#6e6168; --border:#F0E2E8;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{background:var(--bg);color:var(--ink);font-family:'Poppins',sans-serif;line-height:1.6}
+  a{color:inherit;text-decoration:none}
+
+  .topbar{background:var(--pink-dark);color:#fff;text-align:center;font-size:0.82rem;padding:0.55rem;font-weight:500}
+
+  header{display:flex;justify-content:space-between;align-items:center;padding:1.2rem 5vw;border-bottom:1px solid var(--border)}
+  header .logo{font-weight:800;font-size:1.25rem;color:var(--pink-dark)}
+  header .phone{font-weight:600;font-size:0.95rem;display:flex;align-items:center;gap:0.5rem}
+  header .phone .ic{color:var(--pink)}
+
+  .hero{padding:3.5rem 5vw 3rem;text-align:center;background:var(--bg-soft)}
+  .hero h1{font-size:clamp(1.9rem,5vw,2.7rem);font-weight:800;max-width:680px;margin:0 auto;line-height:1.25}
+  .hero h1 span{color:var(--pink-dark)}
+  .hero p{margin:1.1rem auto 0;color:var(--ink-dim);max-width:480px;font-size:1.02rem}
+  .hero .btn-big{
+    display:inline-block;margin-top:1.8rem;background:var(--pink);color:#fff;
+    font-weight:700;font-size:1.05rem;padding:1.1rem 2.6rem;border-radius:50px;
+    box-shadow:0 8px 24px rgba(232,93,138,0.35);transition:transform .15s,background .2s;
+  }
+  .hero .btn-big:hover{background:var(--pink-dark);transform:translateY(-2px)}
+  .hero .sub-note{margin-top:0.9rem;font-size:0.82rem;color:var(--ink-dim)}
+
+  .trust-row{display:flex;justify-content:center;gap:2.2rem;flex-wrap:wrap;padding:1.8rem 5vw;border-bottom:1px solid var(--border)}
+  .trust-row .t{font-size:0.85rem;color:var(--ink-dim);display:flex;align-items:center;gap:0.5rem;font-weight:500}
+  .trust-row .t .dot{color:var(--pink);font-size:1.1rem}
+
+  .section{padding:3.5rem 5vw;max-width:1100px;margin:0 auto}
+  .section h2{font-size:1.7rem;font-weight:700;text-align:center;margin-bottom:0.6rem}
+  .section h2 span{color:var(--pink-dark)}
+  .section .sub{text-align:center;color:var(--ink-dim);max-width:480px;margin:0 auto 2.4rem}
+
+  .price-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.2rem}
+  .price-card{border:2px solid var(--border);border-radius:14px;padding:1.8rem;text-align:center;transition:border-color .2s,transform .2s}
+  .price-card:hover{border-color:var(--pink);transform:translateY(-3px)}
+  .price-card.highlight{border-color:var(--pink);position:relative;background:var(--bg-soft)}
+  .price-card.highlight::before{
+    content:'MAIS PROCURADO';position:absolute;top:-12px;left:50%;transform:translateX(-50%);
+    background:var(--pink);color:#fff;font-size:0.68rem;font-weight:700;padding:0.3rem 0.9rem;border-radius:20px;letter-spacing:0.03em;
+  }
+  .price-card h3{font-size:1.15rem;font-weight:700;margin-bottom:0.5rem}
+  .price-card .price{font-size:1.7rem;font-weight:800;color:var(--pink-dark);margin:0.8rem 0}
+  .price-card .price small{font-size:0.85rem;color:var(--ink-dim);font-weight:500}
+  .price-card ul{list-style:none;text-align:left;margin:1.2rem 0;font-size:0.86rem;color:var(--ink-dim)}
+  .price-card li{padding:0.4rem 0;display:flex;gap:0.5rem}
+  .price-card li::before{content:'✓';color:var(--pink);font-weight:700;flex-shrink:0}
+  .price-card .btn-card{
+    display:block;background:var(--pink);color:#fff;font-weight:700;padding:0.85rem;border-radius:8px;font-size:0.92rem;
+    transition:background .2s;
+  }
+  .price-card .btn-card:hover{background:var(--pink-dark)}
+  @media(max-width:880px){.price-grid{grid-template-columns:1fr}}
+
+  .steps-row{display:flex;justify-content:space-between;gap:1.5rem;flex-wrap:wrap}
+  .step{flex:1;min-width:220px;text-align:center}
+  .step .num{width:46px;height:46px;border-radius:50%;background:var(--pink);color:#fff;font-weight:800;font-size:1.1rem;display:flex;align-items:center;justify-content:center;margin:0 auto 1rem}
+  .step h4{font-weight:700;margin-bottom:0.5rem;font-size:1.02rem}
+  .step p{font-size:0.86rem;color:var(--ink-dim)}
+
+  .testi-band{background:var(--bg-soft);padding:3.5rem 5vw}
+  .testi-row{display:flex;gap:1.2rem;max-width:1100px;margin:0 auto;overflow-x:auto;padding-bottom:0.5rem}
+  .testi-card{background:#fff;border-radius:12px;padding:1.5rem;min-width:260px;flex:1;box-shadow:0 2px 12px rgba(0,0,0,0.04)}
+  .testi-card .stars{color:var(--pink);margin-bottom:0.7rem;font-size:0.9rem}
+  .testi-card p{font-size:0.88rem;color:var(--ink-dim);margin-bottom:0.9rem}
+  .testi-card .name{font-weight:700;font-size:0.88rem}
+
+  .faq-section{padding:3.5rem 5vw;max-width:760px;margin:0 auto}
+  .faq-item{border-bottom:1px solid var(--border)}
+  .faq-item summary{padding:1.3rem 0;cursor:pointer;font-weight:600;font-size:0.98rem;display:flex;justify-content:space-between;align-items:center;list-style:none}
+  .faq-item summary::-webkit-details-marker{display:none}
+  .faq-item summary::after{content:'+';color:var(--pink);font-size:1.4rem;font-weight:300}
+  .faq-item[open] summary::after{content:'–'}
+  .faq-item .answer{padding:0 0 1.4rem;color:var(--ink-dim);font-size:0.9rem}
+
+  .sticky-cta{
+    position:fixed;bottom:0;left:0;right:0;z-index:60;
+    background:#fff;border-top:1px solid var(--border);padding:0.9rem 5vw;
+    display:flex;justify-content:space-between;align-items:center;gap:1rem;
+    box-shadow:0 -4px 20px rgba(0,0,0,0.06);
+  }
+  .sticky-cta .txt{font-size:0.85rem;font-weight:600}
+  .sticky-cta .txt span{display:block;font-size:0.74rem;color:var(--ink-dim);font-weight:400}
+  .sticky-cta .btn-sticky{background:var(--pink);color:#fff;font-weight:700;padding:0.75rem 1.6rem;border-radius:50px;font-size:0.88rem;white-space:nowrap}
+
+  footer{padding:5rem 5vw 7rem;text-align:center;border-top:1px solid var(--border)}
+  footer .logo{font-weight:800;color:var(--pink-dark);font-size:1.1rem;margin-bottom:0.5rem}
+  footer .meta{color:var(--ink-dim);font-size:0.8rem}
+
+  .demo-badge{position:fixed;top:0.6rem;right:0.8rem;z-index:70;background:var(--ink);color:#fff;font-size:0.66rem;font-weight:700;letter-spacing:0.04em;padding:0.35rem 0.7rem;border-radius:4px;text-transform:uppercase}
+
+  @media(max-width:640px){
+    .price-card.highlight::before{font-size:0.6rem}
+    .sticky-cta .txt span{display:none}
+  }
+</style>
+</head>
+<body>
+
+<div class="demo-badge">Demonstração</div>
+<div class="topbar">📅 Vagas abertas esta semana — agende sua avaliação</div>
+
+<header>
+  <div class="logo">Bella Face</div>
+  <a href="#agendar" class="phone"><span class="ic">📞</span> (31) 99999-0000</a>
+</header>
+
+<section class="hero">
+  <h1>Botox e preenchimento com resultado <span>natural</span>, sem parecer artificial.</h1>
+  <p>Avaliação completa antes de qualquer procedimento. Sem pressa, sem indicação genérica.</p>
+  <a href="#agendar" class="btn-big">Agendar Avaliação Gratuita</a>
+  <div class="sub-note">Sem compromisso · Resposta em até 1 hora útil</div>
+</section>
+
+<div class="trust-row">
+  <div class="t"><span class="dot">●</span> +1.800 procedimentos realizados</div>
+  <div class="t"><span class="dot">●</span> Produtos com registro ANVISA</div>
+  <div class="t"><span class="dot">●</span> Nota 4.8 no Google</div>
+</div>
+
+<section class="section">
+  <h2>Procedimentos mais <span>procurados</span></h2>
+  <p class="sub">Preços transparentes, sem pegadinha na consulta.</p>
+  <div class="price-grid">
+    <div class="price-card">
+      <h3>Botox</h3>
+      <div class="price">R$ 890<small>/sessão</small></div>
+      <ul>
+        <li>Testa, glabela e olhos</li>
+        <li>Resultado em até 7 dias</li>
+        <li>Dura de 4 a 6 meses</li>
+      </ul>
+      <a href="#agendar" class="btn-card">Quero esse</a>
+    </div>
+    <div class="price-card highlight">
+      <h3>Harmonização Facial</h3>
+      <div class="price">R$ 2.490<small>/protocolo</small></div>
+      <ul>
+        <li>Avaliação facial completa</li>
+        <li>Botox + Preenchimento</li>
+        <li>Retorno incluso em 30 dias</li>
+      </ul>
+      <a href="#agendar" class="btn-card">Quero esse</a>
+    </div>
+    <div class="price-card">
+      <h3>Preenchimento Labial</h3>
+      <div class="price">R$ 1.200<small>/sessão</small></div>
+      <ul>
+        <li>Ácido hialurônico premium</li>
+        <li>Resultado imediato</li>
+        <li>Dura de 8 a 12 meses</li>
+      </ul>
+      <a href="#agendar" class="btn-card">Quero esse</a>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <h2>Como <span>funciona</span></h2>
+  <p class="sub">Do agendamento ao resultado, em 3 passos simples.</p>
+  <div class="steps-row">
+    <div class="step">
+      <div class="num">1</div>
+      <h4>Agende online</h4>
+      <p>Escolha o melhor horário pelo WhatsApp, sem burocracia.</p>
+    </div>
+    <div class="step">
+      <div class="num">2</div>
+      <h4>Avaliação gratuita</h4>
+      <p>Conversamos sobre seu objetivo antes de indicar qualquer procedimento.</p>
+    </div>
+    <div class="step">
+      <div class="num">3</div>
+      <h4>Procedimento e retorno</h4>
+      <p>Realização do protocolo com retorno de acompanhamento incluso.</p>
+    </div>
+  </div>
+</section>
+
+<div class="testi-band">
+  <h2 style="margin-bottom:2rem">O que dizem nossas <span>pacientes</span></h2>
+  <div class="testi-row">
+    <div class="testi-card">
+      <div class="stars">★★★★★</div>
+      <p>Atendimento rápido e profissional. Marcaram minha avaliação no mesmo dia que mandei mensagem.</p>
+      <div class="name">Camila S.</div>
+    </div>
+    <div class="testi-card">
+      <div class="stars">★★★★★</div>
+      <p>Preço justo e resultado super natural. Já indiquei pra duas amigas.</p>
+      <div class="name">Tatiane O.</div>
+    </div>
+    <div class="testi-card">
+      <div class="stars">★★★★★</div>
+      <p>Gostei muito da avaliação detalhada antes de fazer o procedimento. Me senti segura.</p>
+      <div class="name">Larissa M.</div>
+    </div>
+  </div>
+</div>
+
+<section class="faq-section">
+  <h2 style="margin-bottom:2rem">Perguntas <span>frequentes</span></h2>
+  <details class="faq-item" open>
+    <summary>A avaliação tem custo?</summary>
+    <div class="answer">Não, a primeira avaliação é gratuita e sem compromisso de fechar qualquer procedimento.</div>
+  </details>
+  <details class="faq-item">
+    <summary>Quanto tempo dura o Botox?</summary>
+    <div class="answer">Em média de 4 a 6 meses, variando conforme a região tratada e metabolismo individual.</div>
+  </details>
+  <details class="faq-item">
+    <summary>Preciso de afastamento depois do procedimento?</summary>
+    <div class="answer">Não. A maioria das pacientes retorna às atividades normais no mesmo dia.</div>
+  </details>
+  <details class="faq-item">
+    <summary>Vocês aceitam parcelamento?</summary>
+    <div class="answer">Sim, trabalhamos com parcelamento em até 6x no cartão para os principais protocolos.</div>
+  </details>
+</section>
+
+<footer id="agendar">
+  <div class="logo">Bella Face Clínica</div>
+  <div class="meta">Belo Horizonte, MG — Página de demonstração criada para fins de apresentação comercial.</div>
+</footer>
+
+<div class="sticky-cta">
+  <div class="txt">Avaliação gratuita esta semana<span>Vagas limitadas</span></div>
+  <a href="#agendar" class="btn-sticky">Agendar agora</a>
+</div>
+
+</body>
+</html>

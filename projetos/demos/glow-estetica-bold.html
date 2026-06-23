@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>GLOW Estética — Sua Melhor Versão</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#0F0F10; --bg-card:#191919;
+    --lime:#D6FF3F; --coral:#FF5C5C; --blue:#5C8BFF;
+    --text:#F5F5F0; --text-dim:#a3a39c; --border:#2a2a2a;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{background:var(--bg);color:var(--text);font-family:'Inter',sans-serif;line-height:1.5;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+  a{color:inherit;text-decoration:none}
+  .display{font-family:'Space Grotesk',sans-serif}
+
+  nav{position:fixed;top:0;left:0;right:0;z-index:50;display:flex;justify-content:space-between;align-items:center;padding:1.4rem 5vw;background:rgba(15,15,16,0.75);backdrop-filter:blur(10px);border-bottom:2px solid var(--lime)}
+  nav .logo{font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:1.5rem;letter-spacing:-0.02em}
+  nav .logo span{color:var(--lime)}
+  nav .links{display:flex;gap:2rem;font-size:0.88rem;font-weight:500}
+  nav .links a{color:var(--text-dim);transition:color .2s}
+  nav .links a:hover{color:var(--lime)}
+  nav .cta-nav{background:var(--lime);color:#0F0F10;padding:0.6rem 1.4rem;border-radius:6px;font-size:0.85rem;font-weight:700}
+  @media(max-width:880px){nav .links{display:none}}
+
+  .hero{min-height:94vh;display:flex;align-items:center;padding:7rem 5vw 3rem;position:relative;overflow:hidden}
+  .hero .blob{position:absolute;border-radius:50%;filter:blur(60px);opacity:0.5;z-index:0}
+  .hero .blob.b1{width:420px;height:420px;background:var(--coral);top:-10%;right:-8%}
+  .hero .blob.b2{width:300px;height:300px;background:var(--blue);bottom:-15%;left:-5%}
+  .hero-inner{position:relative;z-index:2;max-width:680px}
+  .hero .tag{display:inline-block;background:var(--lime);color:#0F0F10;font-weight:700;font-size:0.78rem;padding:0.45rem 1rem;border-radius:100px;margin-bottom:1.6rem;letter-spacing:0.02em}
+  .hero h1{font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:clamp(2.6rem,6.5vw,5rem);line-height:1.02;letter-spacing:-0.02em}
+  .hero h1 .hl{color:var(--lime)}
+  .hero p.lede{margin-top:1.6rem;font-size:1.1rem;color:var(--text-dim);max-width:460px}
+  .hero-ctas{margin-top:2.4rem;display:flex;gap:1rem;flex-wrap:wrap}
+  .btn-primary{background:var(--lime);color:#0F0F10;padding:1rem 2.1rem;border-radius:8px;font-weight:700;font-size:0.92rem;transition:transform .2s}
+  .btn-primary:hover{transform:translateY(-3px) rotate(-1deg)}
+  .btn-secondary{border:2px solid var(--text);padding:1rem 2.1rem;border-radius:8px;font-weight:600;font-size:0.92rem;transition:border-color .2s,color .2s}
+  .btn-secondary:hover{border-color:var(--lime);color:var(--lime)}
+
+  .marquee{background:var(--lime);color:#0F0F10;padding:1rem 0;overflow:hidden;transform:rotate(-1.2deg);margin:2rem 0;border-top:2px solid #0F0F10;border-bottom:2px solid #0F0F10}
+  .marquee .track{display:flex;gap:3rem;white-space:nowrap;animation:scroll 22s linear infinite;width:max-content;font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:1.1rem;text-transform:uppercase}
+  @keyframes scroll{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+
+  .section{padding:6rem 5vw;max-width:1200px;margin:0 auto}
+  .section-head{max-width:600px;margin-bottom:3rem}
+  .section-head .tag-sm{display:inline-block;background:var(--bg-card);border:1px solid var(--border);color:var(--text-dim);font-size:0.78rem;padding:0.4rem 0.9rem;border-radius:100px;margin-bottom:1.2rem}
+  .section-head h2{font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:clamp(2rem,3.6vw,2.8rem);letter-spacing:-0.01em}
+  .section-head h2 .hl{color:var(--lime)}
+  .section-head p{margin-top:1rem;color:var(--text-dim)}
+
+  .bento{display:grid;grid-template-columns:repeat(3,1fr);grid-template-rows:repeat(2,auto);gap:1.2rem}
+  .bento-card{background:var(--bg-card);border:1px solid var(--border);border-radius:18px;padding:2rem;transition:transform .25s,border-color .25s}
+  .bento-card:hover{transform:translateY(-4px);border-color:var(--lime)}
+  .bento-card.big{grid-column:span 2;grid-row:span 2;display:flex;flex-direction:column;justify-content:space-between;min-height:340px}
+  .bento-card .price-tag{display:inline-block;font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:1.5rem;color:var(--lime);margin-top:1rem}
+  .bento-card h3{font-family:'Space Grotesk',sans-serif;font-size:1.3rem;font-weight:700;margin-bottom:0.6rem}
+  .bento-card p{color:var(--text-dim);font-size:0.92rem}
+  .bento-card .icon-big{font-size:2.4rem;margin-bottom:0.5rem}
+  @media(max-width:880px){.bento{grid-template-columns:1fr}.bento-card.big{grid-column:span 1;grid-row:span 1;min-height:auto}}
+
+  .stat-band{display:grid;grid-template-columns:repeat(4,1fr);gap:1.2rem;margin-top:1.5rem}
+  .stat-box{background:var(--bg-card);border:1px solid var(--border);border-radius:14px;padding:1.8rem;text-align:center}
+  .stat-box .num{font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:2.1rem;color:var(--lime)}
+  .stat-box .lbl{font-size:0.8rem;color:var(--text-dim);margin-top:0.3rem}
+  @media(max-width:880px){.stat-band{grid-template-columns:repeat(2,1fr)}}
+
+  .testi-strip{display:flex;gap:1.3rem;overflow-x:auto;padding-bottom:0.5rem}
+  .testi-pill{background:var(--bg-card);border:1px solid var(--border);border-radius:16px;padding:1.8rem;min-width:280px;flex:1}
+  .testi-pill .stars{color:var(--lime);margin-bottom:0.8rem}
+  .testi-pill p{font-size:0.92rem;color:var(--text-dim);margin-bottom:1rem}
+  .testi-pill .who{display:flex;align-items:center;gap:0.7rem}
+  .testi-pill .who .av{width:34px;height:34px;border-radius:50%;background:var(--coral);display:flex;align-items:center;justify-content:center;font-weight:700;font-size:0.85rem;color:#0F0F10;flex-shrink:0}
+  .testi-pill .who .nm{font-weight:600;font-size:0.86rem}
+
+  .cta-final{position:relative;text-align:center;padding:7rem 5vw;border-top:2px solid var(--lime);overflow:hidden}
+  .cta-final .blob{position:absolute;width:500px;height:500px;background:var(--blue);border-radius:50%;filter:blur(80px);opacity:0.35;top:-20%;left:50%;transform:translateX(-50%)}
+  .cta-final .inner{position:relative;z-index:2}
+  .cta-final .tag-sm{display:inline-block;background:var(--lime);color:#0F0F10;font-weight:700;font-size:0.78rem;padding:0.45rem 1rem;border-radius:100px;margin-bottom:1.4rem}
+  .cta-final h2{font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:clamp(2.2rem,4vw,3.3rem);max-width:680px;margin:0 auto;line-height:1.08;letter-spacing:-0.01em}
+  .cta-final h2 .hl{color:var(--lime)}
+  .cta-final p{margin:1.3rem auto 2.2rem;color:var(--text-dim);max-width:460px}
+
+  footer{padding:3rem 5vw;border-top:1px solid var(--border);display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:1.5rem}
+  footer .logo{font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:1.2rem}
+  footer .logo span{color:var(--lime)}
+  footer .meta{color:var(--text-dim);font-size:0.8rem;text-align:right}
+
+  .demo-badge{position:fixed;bottom:1.2rem;right:1.2rem;z-index:60;background:var(--lime);color:#0F0F10;font-size:0.7rem;font-weight:700;letter-spacing:0.04em;padding:0.5rem 0.9rem;border-radius:6px;text-transform:uppercase}
+
+  @media(max-width:640px){.section{padding:4.5rem 6vw}}
+</style>
+</head>
+<body>
+
+<div class="demo-badge">Página de demonstração</div>
+
+<nav>
+  <a href="#" class="logo">GLOW<span>.</span></a>
+  <div class="links">
+    <a href="#procedimentos">Procedimentos</a>
+    <a href="#numeros">Resultados</a>
+  </div>
+  <a href="#agendar" class="cta-nav">Agendar</a>
+</nav>
+
+<section class="hero">
+  <div class="blob b1"></div>
+  <div class="blob b2"></div>
+  <div class="hero-inner">
+    <span class="tag">📍 Belo Horizonte</span>
+    <h1 class="display">Sua pele, sua <span class="hl">régua.</span></h1>
+    <p class="lede">Botox, preenchimento e skincare avançado pra quem quer se sentir bem na própria pele — sem exagero, sem padrão único de beleza.</p>
+    <div class="hero-ctas">
+      <a href="#agendar" class="btn-primary">Quero agendar →</a>
+      <a href="#procedimentos" class="btn-secondary">Ver procedimentos</a>
+    </div>
+  </div>
+</section>
+
+<div class="marquee">
+  <div class="track">
+    <span>✦ BOTOX</span><span>✦ PREENCHIMENTO</span><span>✦ SKINBOOSTER</span><span>✦ HARMONIZAÇÃO</span>
+    <span>✦ BOTOX</span><span>✦ PREENCHIMENTO</span><span>✦ SKINBOOSTER</span><span>✦ HARMONIZAÇÃO</span>
+  </div>
+</div>
+
+<section class="section" id="procedimentos">
+  <div class="section-head">
+    <span class="tag-sm">Procedimentos</span>
+    <h2 class="display">Escolha o que faz <span class="hl">sentido</span> pra você.</h2>
+  </div>
+  <div class="bento">
+    <div class="bento-card big">
+      <div>
+        <div class="icon-big">✦</div>
+        <h3 class="display">Harmonização Facial</h3>
+        <p>Protocolo completo combinando preenchimento, botox e bioestimuladores pra um rosto equilibrado, do seu jeito.</p>
+      </div>
+      <div class="price-tag">a partir de R$ 2.400</div>
+    </div>
+    <div class="bento-card">
+      <div class="icon-big">◆</div>
+      <h3 class="display">Botox</h3>
+      <p>Linhas de expressão mais suaves, sem perder a expressividade do rosto.</p>
+      <div class="price-tag">R$ 850</div>
+    </div>
+    <div class="bento-card">
+      <div class="icon-big">●</div>
+      <h3 class="display">Preenchimento</h3>
+      <p>Volume natural em lábios, bochechas ou queixo.</p>
+      <div class="price-tag">R$ 1.150</div>
+    </div>
+    <div class="bento-card">
+      <div class="icon-big">▲</div>
+      <h3 class="display">Skinbooster</h3>
+      <p>Hidratação profunda pra pele com viço de dentro pra fora.</p>
+      <div class="price-tag">R$ 690</div>
+    </div>
+    <div class="bento-card">
+      <div class="icon-big">■</div>
+      <h3 class="display">Bichectomia</h3>
+      <p>Afinamento do contorno facial com técnica minimamente invasiva.</p>
+      <div class="price-tag">R$ 3.200</div>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="numeros">
+  <div class="section-head">
+    <span class="tag-sm">Números</span>
+    <h2 class="display">A real, sem <span class="hl">enrolação</span>.</h2>
+  </div>
+  <div class="stat-band">
+    <div class="stat-box"><div class="num display">2.1k+</div><div class="lbl">procedimentos feitos</div></div>
+    <div class="stat-box"><div class="num display">4.9★</div><div class="lbl">avaliação no Google</div></div>
+    <div class="stat-box"><div class="num display">5 anos</div><div class="lbl">de clínica em BH</div></div>
+    <div class="stat-box"><div class="num display">98%</div><div class="lbl">indicam pra amigas</div></div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="section-head">
+    <span class="tag-sm">Quem já passou por aqui</span>
+    <h2 class="display">Depoimentos <span class="hl">reais</span>.</h2>
+  </div>
+  <div class="testi-strip">
+    <div class="testi-pill">
+      <div class="stars">★★★★★</div>
+      <p>Lugar super acolhedor, sem aquele clima de "vamos te convencer a fazer tudo". Recomendo demais.</p>
+      <div class="who"><div class="av">A</div><div class="nm">Amanda T.</div></div>
+    </div>
+    <div class="testi-pill">
+      <div class="stars">★★★★★</div>
+      <p>Fiz minha primeira harmonização aqui e o resultado ficou exatamente do jeito que eu queria — natural.</p>
+      <div class="who"><div class="av">B</div><div class="nm">Bia F.</div></div>
+    </div>
+    <div class="testi-pill">
+      <div class="stars">★★★★★</div>
+      <p>Atendimento direto, sem enrolação, e o preço bate com o que foi combinado na avaliação.</p>
+      <div class="who"><div class="av">C</div><div class="nm">Carol M.</div></div>
+    </div>
+  </div>
+</section>
+
+<section class="cta-final" id="agendar">
+  <div class="blob"></div>
+  <div class="inner">
+    <span class="tag-sm">Bora marcar?</span>
+    <h2 class="display">Sua avaliação começa com uma <span class="hl">conversa</span>, não com agulha.</h2>
+    <p>Vagas limitadas por semana pra garantir atenção de verdade.</p>
+    <a href="#" class="btn-primary">Falar no WhatsApp →</a>
+  </div>
+</section>
+
+<footer>
+  <a href="#" class="logo">GLOW<span>.</span></a>
+  <div class="meta">Belo Horizonte, MG — Página de demonstração criada para fins de apresentação comercial.</div>
+</footer>
+
+</body>
+</html>

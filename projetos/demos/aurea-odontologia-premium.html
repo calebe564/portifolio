@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Áurea Odontologia — Estética Dental de Alto Padrão</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,500&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#0c0b0a; --bg-el:#161412; --bg-card:#181513;
+    --border:#2b2622; --text:#EDE7DC; --text-dim:#a89e8c; --text-faint:#6e6557;
+    --bronze:#B98D5A; --bronze-bright:#D4A876; --bronze-dim:#7a5d3c;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{background:var(--bg);color:var(--text);font-family:'Inter',sans-serif;line-height:1.6;-webkit-font-smoothing:antialiased}
+  a{color:inherit;text-decoration:none}
+  .serif{font-family:'Cormorant Garamond',serif}
+
+  nav{position:fixed;top:0;left:0;right:0;z-index:50;display:flex;justify-content:space-between;align-items:center;padding:1.6rem 5vw;background:rgba(12,11,10,0.75);backdrop-filter:blur(10px);border-bottom:1px solid rgba(255,255,255,0.06)}
+  nav .logo{font-family:'Cormorant Garamond',serif;font-size:1.5rem;letter-spacing:0.05em;color:var(--bronze-bright);font-weight:500}
+  nav .links{display:flex;gap:2.4rem;font-size:0.82rem;letter-spacing:0.05em;text-transform:uppercase}
+  nav .links a{color:var(--text-dim);transition:color .2s}
+  nav .links a:hover{color:var(--bronze-bright)}
+  nav .cta-nav{border:1px solid var(--bronze-dim);color:var(--bronze-bright);padding:0.55rem 1.3rem;font-size:0.78rem;letter-spacing:0.08em;text-transform:uppercase;transition:background .2s}
+  nav .cta-nav:hover{background:rgba(185,141,90,0.1)}
+  @media(max-width:880px){nav .links{display:none}}
+
+  .hero{min-height:100vh;display:flex;align-items:center;padding:8rem 5vw 4rem;position:relative;
+    background:linear-gradient(120deg, rgba(12,11,10,0.95) 38%, rgba(12,11,10,0.5) 65%, rgba(12,11,10,0.15)),
+    url('https://images.unsplash.com/photo-1606811841689-23dfddce3e95?w=1600&q=80') center/cover;}
+  .hero-inner{max-width:620px}
+  .hero .eyebrow{display:flex;align-items:center;gap:0.8rem;color:var(--bronze-bright);font-size:0.75rem;letter-spacing:0.25em;text-transform:uppercase;margin-bottom:1.8rem}
+  .hero .eyebrow::before{content:'';width:36px;height:1px;background:var(--bronze)}
+  .hero h1{font-size:clamp(2.6rem,5.2vw,4rem);font-weight:500;line-height:1.12;font-style:italic}
+  .hero h1 .reg{font-style:normal;color:var(--text)}
+  .hero p.lede{margin-top:1.8rem;font-size:1.08rem;color:var(--text-dim);max-width:460px}
+  .hero-ctas{margin-top:2.6rem;display:flex;gap:1.1rem;flex-wrap:wrap}
+  .btn-primary{background:var(--bronze);color:#161412;padding:1rem 2.2rem;font-weight:600;font-size:0.85rem;letter-spacing:0.08em;text-transform:uppercase;transition:background .2s,transform .2s}
+  .btn-primary:hover{background:var(--bronze-bright);transform:translateY(-2px)}
+  .btn-secondary{border:1px solid rgba(237,231,220,0.25);padding:1rem 2.2rem;font-size:0.85rem;letter-spacing:0.08em;text-transform:uppercase;transition:border-color .2s}
+  .btn-secondary:hover{border-color:var(--bronze)}
+
+  .signature-strip{border-top:1px solid var(--border);border-bottom:1px solid var(--border);background:var(--bg-el);
+    display:grid;grid-template-columns:repeat(4,1fr)}
+  .signature-strip .cell{padding:2.2rem 1.5rem;text-align:center;border-right:1px solid var(--border)}
+  .signature-strip .cell:last-child{border-right:none}
+  .signature-strip .cell .n{font-family:'Cormorant Garamond',serif;font-size:2rem;color:var(--bronze-bright);font-style:italic}
+  .signature-strip .cell .l{font-size:0.75rem;color:var(--text-faint);letter-spacing:0.06em;text-transform:uppercase;margin-top:0.4rem}
+  @media(max-width:780px){.signature-strip{grid-template-columns:repeat(2,1fr)}.signature-strip .cell:nth-child(2n){border-right:none}}
+
+  .section{padding:7rem 5vw;max-width:1280px;margin:0 auto}
+  .section-head{max-width:640px;margin:0 auto 4rem;text-align:center}
+  .section-head .eyebrow{color:var(--bronze-bright);font-size:0.75rem;letter-spacing:0.22em;text-transform:uppercase;margin-bottom:1.1rem;display:block}
+  .section-head h2{font-family:'Cormorant Garamond',serif;font-size:clamp(2rem,3.4vw,2.7rem);font-weight:500}
+  .section-head h2 i{color:var(--bronze-bright)}
+  .section-head p{margin-top:1.1rem;color:var(--text-dim)}
+
+  .treat-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--border);border:1px solid var(--border)}
+  .treat-card{background:var(--bg);padding:2.6rem 1.8rem;transition:background .25s}
+  .treat-card:hover{background:var(--bg-card)}
+  .treat-card .ic{font-family:'Cormorant Garamond',serif;font-size:1.6rem;color:var(--bronze-dim);font-style:italic;margin-bottom:1rem}
+  .treat-card h3{font-family:'Cormorant Garamond',serif;font-size:1.3rem;margin-bottom:0.7rem}
+  .treat-card p{font-size:0.88rem;color:var(--text-dim)}
+  @media(max-width:880px){.treat-grid{grid-template-columns:repeat(2,1fr)}}
+
+  .gallery{display:grid;grid-template-columns:1.1fr 0.9fr;gap:1.5rem}
+  .gallery .big{min-height:480px;background:url('https://images.unsplash.com/photo-1581585504870-d9a36fbd2f1c?w=1200&q=80') center/cover;border:1px solid var(--border)}
+  .gallery .col{display:flex;flex-direction:column;gap:1.5rem}
+  .gallery .small{flex:1;min-height:230px;border:1px solid var(--border)}
+  .gallery .small.a{background:url('https://images.unsplash.com/photo-1629909613654-28e377c37b09?w=800&q=80') center/cover}
+  .gallery .small.b{background:url('https://images.unsplash.com/photo-1588776814546-1ffcf47267a5?w=800&q=80') center/cover}
+  @media(max-width:880px){.gallery{grid-template-columns:1fr}}
+
+  .quote-block{text-align:center;max-width:760px;margin:0 auto;padding:5rem 2rem}
+  .quote-block .mark{font-family:'Cormorant Garamond',serif;font-size:4rem;color:var(--bronze-dim);line-height:0.5}
+  .quote-block p{font-family:'Cormorant Garamond',serif;font-size:1.7rem;font-style:italic;line-height:1.45;color:var(--text)}
+  .quote-block .who{margin-top:1.8rem;font-size:0.82rem;letter-spacing:0.06em;text-transform:uppercase;color:var(--text-faint)}
+
+  .pricing-table{border:1px solid var(--border)}
+  .pricing-row{display:flex;justify-content:space-between;align-items:center;padding:1.6rem 2.2rem;border-bottom:1px solid var(--border)}
+  .pricing-row:last-child{border-bottom:none}
+  .pricing-row .name{font-family:'Cormorant Garamond',serif;font-size:1.25rem}
+  .pricing-row .desc{font-size:0.82rem;color:var(--text-faint);margin-top:0.2rem}
+  .pricing-row .val{font-family:'Cormorant Garamond',serif;font-size:1.4rem;color:var(--bronze-bright);font-style:italic;white-space:nowrap;margin-left:1.5rem}
+
+  .cta-final{text-align:center;padding:7rem 5vw;border-top:1px solid var(--border);
+    background:linear-gradient(180deg,rgba(12,11,10,0.4),rgba(12,11,10,0.92)),url('https://images.unsplash.com/photo-1564420228450-39c8b3ce4944?w=1600&q=80') center/cover}
+  .cta-final .eyebrow{color:var(--bronze-bright);font-size:0.75rem;letter-spacing:0.2em;text-transform:uppercase;margin-bottom:1.2rem}
+  .cta-final h2{font-family:'Cormorant Garamond',serif;font-size:clamp(2.1rem,3.8vw,3rem);font-style:italic;max-width:680px;margin:0 auto;line-height:1.2}
+  .cta-final p{margin:1.3rem auto 2.3rem;color:var(--text-dim);max-width:460px}
+
+  footer{padding:3rem 5vw;border-top:1px solid var(--border);display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:1.5rem}
+  footer .logo{font-family:'Cormorant Garamond',serif;color:var(--bronze-bright);font-size:1.2rem}
+  footer .meta{color:var(--text-faint);font-size:0.8rem;text-align:right}
+
+  .demo-badge{position:fixed;bottom:1.2rem;right:1.2rem;z-index:60;background:rgba(185,141,90,0.95);color:#161412;font-size:0.7rem;font-weight:700;letter-spacing:0.05em;padding:0.5rem 0.9rem;text-transform:uppercase}
+
+  @media(max-width:640px){.section{padding:4.5rem 6vw}}
+</style>
+</head>
+<body>
+
+<div class="demo-badge">Página de demonstração</div>
+
+<nav>
+  <a href="#" class="logo">Áurea</a>
+  <div class="links">
+    <a href="#tratamentos">Tratamentos</a>
+    <a href="#sorrisos">Sorrisos</a>
+    <a href="#valores">Investimento</a>
+  </div>
+  <a href="#agendar" class="cta-nav">Agendar</a>
+</nav>
+
+<section class="hero">
+  <div class="hero-inner">
+    <div class="eyebrow">Odontologia Estética · Belo Horizonte</div>
+    <h1 class="serif">Um sorriso <span class="reg">é a primeira</span><br>impressão que <span class="reg">fica.</span></h1>
+    <p class="lede">Lentes de contato dental, clareamento e reabilitação estética conduzidos com precisão milimétrica e visão artística do sorriso.</p>
+    <div class="hero-ctas">
+      <a href="#agendar" class="btn-primary">Agendar Avaliação</a>
+      <a href="#sorrisos" class="btn-secondary">Ver Transformações</a>
+    </div>
+  </div>
+</section>
+
+<div class="signature-strip">
+  <div class="cell"><div class="n">17</div><div class="l">Anos de Atuação</div></div>
+  <div class="cell"><div class="n">2.400+</div><div class="l">Sorrisos Transformados</div></div>
+  <div class="cell"><div class="n">4.9</div><div class="l">Avaliação Média</div></div>
+  <div class="cell"><div class="n">100%</div><div class="l">Materiais Importados</div></div>
+</div>
+
+<section class="section" id="tratamentos">
+  <div class="section-head">
+    <span class="eyebrow">Tratamentos</span>
+    <h2 class="serif">Cada sorriso é um <i>projeto</i> único.</h2>
+    <p>Planejamento digital antes de qualquer procedimento, com simulação do resultado final.</p>
+  </div>
+  <div class="treat-grid">
+    <div class="treat-card"><div class="ic">I.</div><h3 class="serif">Lentes de Contato Dental</h3><p>Porcelana ultrafina para correção de forma, cor e alinhamento sem desgaste do dente.</p></div>
+    <div class="treat-card"><div class="ic">II.</div><h3 class="serif">Clareamento a Laser</h3><p>Protocolo combinado consultório + manutenção domiciliar, com resultado em até 6 tons.</p></div>
+    <div class="treat-card"><div class="ic">III.</div><h3 class="serif">Reabilitação Oral</h3><p>Reconstrução completa da função e estética em casos de desgaste ou perdas dentárias.</p></div>
+    <div class="treat-card"><div class="ic">IV.</div><h3 class="serif">Design de Sorriso Digital</h3><p>Simulação computadorizada do resultado final antes do início de qualquer tratamento.</p></div>
+  </div>
+</section>
+
+<section class="section" id="sorrisos">
+  <div class="section-head">
+    <span class="eyebrow">Galeria</span>
+    <h2 class="serif">Transformações <i>reais</i>.</h2>
+  </div>
+  <div class="gallery">
+    <div class="big"></div>
+    <div class="col">
+      <div class="small a"></div>
+      <div class="small b"></div>
+    </div>
+  </div>
+</section>
+
+<div class="quote-block">
+  <div class="mark serif">"</div>
+  <p>Não troquei meu sorriso — recuperei a confiança de sorrir sem pensar em esconder.</p>
+  <div class="who">Renata M. — Lentes de Contato Dental</div>
+</div>
+
+<section class="section" id="valores">
+  <div class="section-head">
+    <span class="eyebrow">Investimento</span>
+    <h2 class="serif">Transparência desde a <i>primeira</i> consulta.</h2>
+  </div>
+  <div class="pricing-table">
+    <div class="pricing-row">
+      <div><div class="name serif">Avaliação + Planejamento Digital</div><div class="desc">Inclui simulação do sorriso</div></div>
+      <div class="val">R$ 250</div>
+    </div>
+    <div class="pricing-row">
+      <div><div class="name serif">Clareamento Profissional</div><div class="desc">Protocolo completo, 3 sessões</div></div>
+      <div class="val">a partir de R$ 980</div>
+    </div>
+    <div class="pricing-row">
+      <div><div class="name serif">Lente de Contato (unidade)</div><div class="desc">Porcelana importada</div></div>
+      <div class="val">a partir de R$ 1.450</div>
+    </div>
+    <div class="pricing-row">
+      <div><div class="name serif">Reabilitação Oral Completa</div><div class="desc">Avaliada individualmente</div></div>
+      <div class="val">sob consulta</div>
+    </div>
+  </div>
+</section>
+
+<section class="cta-final" id="agendar">
+  <div class="eyebrow">Próximo Passo</div>
+  <h2 class="serif">Seu sorriso ideal começa com uma <i>conversa</i>.</h2>
+  <p>Avaliações com vagas limitadas por semana.</p>
+  <a href="#" class="btn-primary">Agendar pelo WhatsApp</a>
+</section>
+
+<footer>
+  <a href="#" class="logo">Áurea Odontologia</a>
+  <div class="meta">Belo Horizonte, MG — Página de demonstração criada para fins de apresentação comercial.</div>
+</footer>
+
+</body>
+</html>

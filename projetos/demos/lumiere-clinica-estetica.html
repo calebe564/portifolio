@@ -1,0 +1,791 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Lumière Clínica Estética — Harmonização Facial em Belo Horizonte</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,500&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg: #0A0908;
+    --bg-elevated: #131110;
+    --bg-card: #161412;
+    --border: #2a2520;
+    --text: #F0EBE3;
+    --text-dim: #b3aa9c;
+    --text-faint: #756c5e;
+    --gold: #C9A467;
+    --gold-bright: #E0BD7E;
+    --gold-dim: #8a7244;
+  }
+
+  *{box-sizing:border-box;margin:0;padding:0}
+
+  html{scroll-behavior:smooth}
+
+  body{
+    background:var(--bg);
+    color:var(--text);
+    font-family:'Inter', system-ui, sans-serif;
+    line-height:1.6;
+    -webkit-font-smoothing:antialiased;
+    overflow-x:hidden;
+  }
+
+  a{color:inherit;text-decoration:none}
+  img{display:block;max-width:100%}
+
+  .serif{ font-family:'Playfair Display', serif; }
+
+  /* ===== NAV ===== */
+  nav{
+    position:fixed;
+    top:0; left:0; right:0;
+    z-index:50;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    padding:1.4rem 5vw;
+    background:rgba(10,9,8,0.7);
+    backdrop-filter:blur(10px);
+    border-bottom:1px solid rgba(255,255,255,0.06);
+  }
+  nav .logo{
+    font-family:'Playfair Display', serif;
+    font-size:1.3rem;
+    letter-spacing:0.04em;
+    color:var(--gold-bright);
+  }
+  nav .logo span{ color:var(--text); font-weight:300; }
+  nav .links{
+    display:flex;
+    gap:2.2rem;
+    font-size:0.85rem;
+    letter-spacing:0.03em;
+  }
+  nav .links a{
+    color:var(--text-dim);
+    transition:color 0.2s;
+  }
+  nav .links a:hover{ color:var(--gold-bright); }
+  nav .cta-nav{
+    background:var(--gold);
+    color:#171310;
+    padding:0.6rem 1.4rem;
+    border-radius:3px;
+    font-size:0.82rem;
+    font-weight:600;
+    letter-spacing:0.02em;
+  }
+  @media (max-width:880px){
+    nav .links{ display:none; }
+  }
+
+  /* ===== HERO ===== */
+  .hero{
+    position:relative;
+    min-height:100vh;
+    display:flex;
+    align-items:center;
+    padding:7rem 5vw 4rem;
+    background:
+      linear-gradient(115deg, rgba(10,9,8,0.94) 35%, rgba(10,9,8,0.55) 60%, rgba(10,9,8,0.2) 100%),
+      url('https://images.unsplash.com/photo-1620916566398-39f1143ab7be?w=1600&q=80') center/cover;
+  }
+
+  .hero-inner{
+    max-width:600px;
+    z-index:2;
+  }
+
+  .hero .eyebrow{
+    display:flex;
+    align-items:center;
+    gap:0.7rem;
+    color:var(--gold-bright);
+    font-size:0.78rem;
+    letter-spacing:0.22em;
+    text-transform:uppercase;
+    margin-bottom:1.6rem;
+  }
+  .hero .eyebrow::before{
+    content:'';
+    width:32px; height:1px;
+    background:var(--gold);
+  }
+
+  .hero h1{
+    font-size:clamp(2.6rem, 5.5vw, 4.2rem);
+    font-weight:500;
+    line-height:1.08;
+    letter-spacing:-0.01em;
+  }
+  .hero h1 em{
+    font-style:italic;
+    color:var(--gold-bright);
+    font-weight:500;
+  }
+
+  .hero p.lede{
+    margin-top:1.6rem;
+    font-size:1.08rem;
+    color:var(--text-dim);
+    max-width:460px;
+  }
+
+  .hero-ctas{
+    margin-top:2.5rem;
+    display:flex;
+    gap:1rem;
+    flex-wrap:wrap;
+  }
+  .btn-primary{
+    background:var(--gold);
+    color:#171310;
+    padding:0.95rem 2rem;
+    border-radius:3px;
+    font-weight:600;
+    font-size:0.92rem;
+    letter-spacing:0.02em;
+    display:inline-flex;
+    align-items:center;
+    gap:0.6rem;
+    transition:background 0.2s, transform 0.2s;
+  }
+  .btn-primary:hover{ background:var(--gold-bright); transform:translateY(-2px); }
+
+  .btn-secondary{
+    border:1px solid rgba(240,235,227,0.25);
+    color:var(--text);
+    padding:0.95rem 2rem;
+    border-radius:3px;
+    font-size:0.92rem;
+    letter-spacing:0.02em;
+    transition:border-color 0.2s, background 0.2s;
+  }
+  .btn-secondary:hover{ border-color:var(--gold); background:rgba(201,164,103,0.08); }
+
+  .hero-trust{
+    margin-top:3.5rem;
+    display:flex;
+    gap:2.2rem;
+    flex-wrap:wrap;
+  }
+  .hero-trust .item{
+    font-size:0.82rem;
+    color:var(--text-faint);
+  }
+  .hero-trust .item strong{
+    display:block;
+    font-family:'Playfair Display', serif;
+    font-size:1.5rem;
+    color:var(--gold-bright);
+    font-weight:600;
+  }
+
+  /* ===== MARQUEE STRIP ===== */
+  .strip{
+    background:var(--bg-elevated);
+    border-top:1px solid var(--border);
+    border-bottom:1px solid var(--border);
+    padding:1.1rem 0;
+    overflow:hidden;
+  }
+  .strip .track{
+    display:flex;
+    gap:3.5rem;
+    white-space:nowrap;
+    animation:scroll-left 28s linear infinite;
+    width:max-content;
+  }
+  .strip .track span{
+    font-size:0.78rem;
+    letter-spacing:0.15em;
+    text-transform:uppercase;
+    color:var(--text-faint);
+  }
+  .strip .track span em{ color:var(--gold-dim); font-style:normal; }
+  @keyframes scroll-left{
+    from{ transform:translateX(0); }
+    to{ transform:translateX(-50%); }
+  }
+
+  /* ===== SECTION SHELL ===== */
+  .section{
+    padding:6.5rem 5vw;
+    max-width:1280px;
+    margin:0 auto;
+  }
+  .section-head{
+    max-width:640px;
+    margin-bottom:3.5rem;
+  }
+  .section-head .eyebrow{
+    color:var(--gold-bright);
+    font-size:0.78rem;
+    letter-spacing:0.2em;
+    text-transform:uppercase;
+    margin-bottom:1rem;
+    display:block;
+  }
+  .section-head h2{
+    font-size:clamp(2rem, 3.5vw, 2.8rem);
+    font-weight:500;
+    line-height:1.15;
+  }
+  .section-head h2 em{ color:var(--gold-bright); font-style:italic; }
+  .section-head p{
+    margin-top:1.1rem;
+    color:var(--text-dim);
+    font-size:1.02rem;
+  }
+
+  /* ===== PROCEDIMENTOS GRID ===== */
+  .proc-grid{
+    display:grid;
+    grid-template-columns:repeat(3, 1fr);
+    gap:1.5rem;
+  }
+  .proc-card{
+    background:var(--bg-card);
+    border:1px solid var(--border);
+    border-radius:6px;
+    padding:2.4rem 2rem;
+    transition:border-color 0.25s, transform 0.25s;
+  }
+  .proc-card:hover{
+    border-color:var(--gold-dim);
+    transform:translateY(-4px);
+  }
+  .proc-card .num{
+    font-family:'Playfair Display', serif;
+    font-size:0.85rem;
+    color:var(--gold-dim);
+    letter-spacing:0.1em;
+  }
+  .proc-card h3{
+    font-family:'Playfair Display', serif;
+    font-size:1.4rem;
+    font-weight:600;
+    margin:1rem 0 0.8rem;
+  }
+  .proc-card p{
+    color:var(--text-dim);
+    font-size:0.92rem;
+  }
+  .proc-card .price{
+    margin-top:1.3rem;
+    font-size:0.82rem;
+    color:var(--text-faint);
+    padding-top:1.1rem;
+    border-top:1px solid var(--border);
+  }
+  .proc-card .price strong{ color:var(--gold-bright); font-size:1rem; }
+
+  @media (max-width:880px){
+    .proc-grid{ grid-template-columns:1fr; }
+  }
+
+  /* ===== BEFORE/AFTER SHOWCASE ===== */
+  .showcase{
+    background:var(--bg-elevated);
+    border-top:1px solid var(--border);
+    border-bottom:1px solid var(--border);
+  }
+  .showcase-grid{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:0;
+    align-items:stretch;
+  }
+  .showcase-media{
+    position:relative;
+    min-height:480px;
+    background:url('https://images.unsplash.com/photo-1487412947147-5cebf100ffc2?w=1200&q=80') center/cover;
+  }
+  .showcase-media::after{
+    content:'';
+    position:absolute; inset:0;
+    background:linear-gradient(90deg, rgba(10,9,8,0.5), transparent 30%);
+  }
+  .showcase-text{
+    padding:5rem 4vw;
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+  }
+  .showcase-text .eyebrow{
+    color:var(--gold-bright);
+    font-size:0.78rem;
+    letter-spacing:0.2em;
+    text-transform:uppercase;
+    margin-bottom:1.2rem;
+  }
+  .showcase-text h2{
+    font-family:'Playfair Display', serif;
+    font-size:clamp(1.9rem, 3vw, 2.4rem);
+    font-weight:500;
+    line-height:1.2;
+  }
+  .showcase-text h2 em{ color:var(--gold-bright); font-style:italic; }
+  .showcase-text p{
+    margin-top:1.3rem;
+    color:var(--text-dim);
+    max-width:440px;
+  }
+  .showcase-list{
+    margin-top:2rem;
+    display:flex;
+    flex-direction:column;
+    gap:1rem;
+  }
+  .showcase-list .row{
+    display:flex;
+    gap:0.9rem;
+    align-items:flex-start;
+    font-size:0.92rem;
+    color:var(--text-dim);
+  }
+  .showcase-list .row .dot{
+    width:6px; height:6px;
+    background:var(--gold);
+    border-radius:50%;
+    margin-top:0.5rem;
+    flex-shrink:0;
+  }
+
+  @media (max-width:880px){
+    .showcase-grid{ grid-template-columns:1fr; }
+    .showcase-media{ min-height:320px; }
+  }
+
+  /* ===== DEPOIMENTOS ===== */
+  .testi-grid{
+    display:grid;
+    grid-template-columns:repeat(3, 1fr);
+    gap:1.5rem;
+  }
+  .testi-card{
+    background:var(--bg-card);
+    border:1px solid var(--border);
+    border-radius:6px;
+    padding:2.2rem;
+  }
+  .testi-card .stars{
+    color:var(--gold);
+    font-size:0.9rem;
+    letter-spacing:0.15em;
+    margin-bottom:1.2rem;
+  }
+  .testi-card p.quote{
+    font-size:0.95rem;
+    color:var(--text);
+    line-height:1.65;
+    margin-bottom:1.5rem;
+  }
+  .testi-card .author{
+    display:flex;
+    align-items:center;
+    gap:0.8rem;
+    border-top:1px solid var(--border);
+    padding-top:1.1rem;
+  }
+  .testi-card .author .avatar{
+    width:38px; height:38px;
+    border-radius:50%;
+    background:var(--gold-dim);
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-family:'Playfair Display', serif;
+    font-weight:600;
+    color:#171310;
+    font-size:0.95rem;
+    flex-shrink:0;
+  }
+  .testi-card .author .name{
+    font-size:0.88rem;
+    font-weight:600;
+  }
+  .testi-card .author .proc{
+    font-size:0.78rem;
+    color:var(--text-faint);
+  }
+
+  @media (max-width:880px){
+    .testi-grid{ grid-template-columns:1fr; }
+  }
+
+  /* ===== EQUIPE ===== */
+  .team-banner{
+    display:grid;
+    grid-template-columns:0.9fr 1.1fr;
+    gap:3rem;
+    align-items:center;
+    background:var(--bg-card);
+    border:1px solid var(--border);
+    border-radius:10px;
+    overflow:hidden;
+  }
+  .team-img{
+    height:100%;
+    min-height:420px;
+    background:url('https://images.unsplash.com/photo-1559839734-2b71ea197ec2?w=900&q=80') center/cover;
+  }
+  .team-content{ padding:3rem 3rem 3rem 0; }
+  .team-content .eyebrow{
+    color:var(--gold-bright);
+    font-size:0.78rem;
+    letter-spacing:0.2em;
+    text-transform:uppercase;
+    margin-bottom:1rem;
+    display:block;
+  }
+  .team-content h2{
+    font-family:'Playfair Display', serif;
+    font-size:2rem;
+    font-weight:500;
+    margin-bottom:1.2rem;
+  }
+  .team-content h2 em{ color:var(--gold-bright); font-style:italic; }
+  .team-content p{ color:var(--text-dim); margin-bottom:1rem; }
+  .team-content .creds{
+    display:flex;
+    gap:1.8rem;
+    margin-top:1.8rem;
+    flex-wrap:wrap;
+  }
+  .team-content .creds .c{
+    font-size:0.8rem;
+    color:var(--text-faint);
+    border-left:2px solid var(--gold-dim);
+    padding-left:0.8rem;
+  }
+
+  @media (max-width:880px){
+    .team-banner{ grid-template-columns:1fr; }
+    .team-img{ min-height:280px; }
+    .team-content{ padding:2.2rem; }
+  }
+
+  /* ===== FAQ ===== */
+  .faq-list{
+    max-width:760px;
+    margin:0 auto;
+  }
+  .faq-item{
+    border-bottom:1px solid var(--border);
+  }
+  .faq-item summary{
+    padding:1.6rem 0;
+    cursor:pointer;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    font-size:1.02rem;
+    font-weight:500;
+    list-style:none;
+  }
+  .faq-item summary::-webkit-details-marker{ display:none; }
+  .faq-item summary::after{
+    content:'+';
+    color:var(--gold-bright);
+    font-size:1.4rem;
+    font-weight:300;
+    flex-shrink:0;
+    margin-left:1rem;
+    transition:transform 0.2s;
+  }
+  .faq-item[open] summary::after{ transform:rotate(45deg); }
+  .faq-item .answer{
+    padding:0 0 1.8rem;
+    color:var(--text-dim);
+    font-size:0.94rem;
+    max-width:640px;
+  }
+
+  /* ===== CTA FINAL ===== */
+  .cta-final{
+    position:relative;
+    text-align:center;
+    padding:7rem 5vw;
+    background:
+      linear-gradient(180deg, rgba(10,9,8,0.5), rgba(10,9,8,0.92)),
+      url('https://images.unsplash.com/photo-1505327709020-d8a432cdf3c5?w=1600&q=80') center/cover;
+    border-top:1px solid var(--border);
+  }
+  .cta-final .eyebrow{
+    color:var(--gold-bright);
+    font-size:0.78rem;
+    letter-spacing:0.2em;
+    text-transform:uppercase;
+    margin-bottom:1.2rem;
+  }
+  .cta-final h2{
+    font-family:'Playfair Display', serif;
+    font-size:clamp(2.2rem, 4vw, 3.2rem);
+    font-weight:500;
+    max-width:680px;
+    margin:0 auto;
+    line-height:1.18;
+  }
+  .cta-final h2 em{ color:var(--gold-bright); font-style:italic; }
+  .cta-final p{
+    margin:1.3rem auto 2.3rem;
+    color:var(--text-dim);
+    max-width:480px;
+  }
+
+  /* ===== FOOTER ===== */
+  footer{
+    padding:3rem 5vw;
+    border-top:1px solid var(--border);
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    flex-wrap:wrap;
+    gap:1.5rem;
+  }
+  footer .logo{
+    font-family:'Playfair Display', serif;
+    color:var(--gold-bright);
+    font-size:1.1rem;
+  }
+  footer .meta{
+    color:var(--text-faint);
+    font-size:0.8rem;
+    text-align:right;
+  }
+
+  .demo-badge{
+    position:fixed;
+    bottom:1.2rem;
+    right:1.2rem;
+    z-index:60;
+    background:rgba(201,164,103,0.95);
+    color:#171310;
+    font-size:0.72rem;
+    font-weight:700;
+    letter-spacing:0.05em;
+    padding:0.5rem 0.9rem;
+    border-radius:4px;
+    text-transform:uppercase;
+  }
+
+  @media (max-width:640px){
+    .section{ padding:4.5rem 6vw; }
+    .proc-card{ padding:1.8rem 1.5rem; }
+  }
+</style>
+</head>
+<body>
+
+<div class="demo-badge">Página de demonstração</div>
+
+<nav>
+  <a href="#" class="logo">Lumière<span> Clínica</span></a>
+  <div class="links">
+    <a href="#procedimentos">Procedimentos</a>
+    <a href="#resultados">Resultados</a>
+    <a href="#equipe">Equipe</a>
+    <a href="#depoimentos">Depoimentos</a>
+  </div>
+  <a href="#agendar" class="cta-nav">Agendar Avaliação</a>
+</nav>
+
+<section class="hero">
+  <div class="hero-inner">
+    <div class="eyebrow">Harmonização Facial · Belo Horizonte</div>
+    <h1 class="serif">Resultados que <em>respeitam</em><br>sua identidade.</h1>
+    <p class="lede">Botox, preenchimento e protocolos de harmonização facial conduzidos com técnica avançada e olhar artístico — para um resultado natural, nunca artificial.</p>
+    <div class="hero-ctas">
+      <a href="#agendar" class="btn-primary">Agendar avaliação →</a>
+      <a href="#procedimentos" class="btn-secondary">Ver procedimentos</a>
+    </div>
+    <div class="hero-trust">
+      <div class="item"><strong>3.200+</strong>procedimentos realizados</div>
+      <div class="item"><strong>9 anos</strong>de atuação em BH</div>
+      <div class="item"><strong>4.9 / 5</strong>avaliação média</div>
+    </div>
+  </div>
+</section>
+
+<div class="strip">
+  <div class="track">
+    <span>Botox <em>•</em></span>
+    <span>Preenchimento Labial <em>•</em></span>
+    <span>Harmonização Facial <em>•</em></span>
+    <span>Bichectomia <em>•</em></span>
+    <span>Fios de PDO <em>•</em></span>
+    <span>Skinbooster <em>•</em></span>
+    <span>Botox <em>•</em></span>
+    <span>Preenchimento Labial <em>•</em></span>
+    <span>Harmonização Facial <em>•</em></span>
+    <span>Bichectomia <em>•</em></span>
+    <span>Fios de PDO <em>•</em></span>
+    <span>Skinbooster <em>•</em></span>
+  </div>
+</div>
+
+<section class="section" id="procedimentos">
+  <div class="section-head">
+    <span class="eyebrow">Procedimentos</span>
+    <h2 class="serif">Protocolos pensados para <em>cada</em> tipo de rosto.</h2>
+    <p>Toda avaliação começa com mapeamento facial individualizado — nenhum protocolo é padrão.</p>
+  </div>
+  <div class="proc-grid">
+    <div class="proc-card">
+      <div class="num">01</div>
+      <h3 class="serif">Toxina Botulínica</h3>
+      <p>Suaviza linhas de expressão em testa, glabela e região periorbital, preservando a naturalidade dos movimentos faciais.</p>
+      <div class="price">A partir de <strong>R$ 890</strong></div>
+    </div>
+    <div class="proc-card">
+      <div class="num">02</div>
+      <h3 class="serif">Preenchimento Labial</h3>
+      <p>Ácido hialurônico de alta densidade para volume e contorno equilibrados, respeitando a proporção natural do rosto.</p>
+      <div class="price">A partir de <strong>R$ 1.200</strong></div>
+    </div>
+    <div class="proc-card">
+      <div class="num">03</div>
+      <h3 class="serif">Harmonização Facial</h3>
+      <p>Protocolo completo combinando preenchimento, bioestimuladores e contorno mandibular para reequilíbrio facial.</p>
+      <div class="price">A partir de <strong>R$ 2.800</strong></div>
+    </div>
+    <div class="proc-card">
+      <div class="num">04</div>
+      <h3 class="serif">Bichectomia</h3>
+      <p>Remoção da bolsa de Bichat para afinamento e definição do contorno facial, com técnica minimamente invasiva.</p>
+      <div class="price">A partir de <strong>R$ 3.500</strong></div>
+    </div>
+    <div class="proc-card">
+      <div class="num">05</div>
+      <h3 class="serif">Fios de PDO</h3>
+      <p>Sustentação e estímulo de colágeno através de fios bioabsorvíveis, indicados para flacidez leve a moderada.</p>
+      <div class="price">A partir de <strong>R$ 1.890</strong></div>
+    </div>
+    <div class="proc-card">
+      <div class="num">06</div>
+      <h3 class="serif">Skinbooster</h3>
+      <p>Hidratação profunda da derme com ácido hialurônico de baixa densidade, para viço e luminosidade da pele.</p>
+      <div class="price">A partir de <strong>R$ 750</strong></div>
+    </div>
+  </div>
+</section>
+
+<section class="showcase" id="resultados">
+  <div class="showcase-grid">
+    <div class="showcase-media"></div>
+    <div class="showcase-text">
+      <span class="eyebrow">Nossa Abordagem</span>
+      <h2 class="serif">Técnica que <em>valoriza</em>,<br>não transforma.</h2>
+      <p>Cada avaliação começa com escuta — entendemos o que te incomoda antes de sugerir qualquer procedimento.</p>
+      <div class="showcase-list">
+        <div class="row"><span class="dot"></span>Avaliação facial fotográfica antes de qualquer indicação</div>
+        <div class="row"><span class="dot"></span>Produtos importados, com registro ANVISA</div>
+        <div class="row"><span class="dot"></span>Acompanhamento de retorno incluso em todos os protocolos</div>
+        <div class="row"><span class="dot"></span>Ambiente climatizado, biossegurança rigorosa</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="equipe">
+  <div class="team-banner">
+    <div class="team-img"></div>
+    <div class="team-content">
+      <span class="eyebrow">Responsável Técnica</span>
+      <h2 class="serif">Dra. Camila Ferraz</h2>
+      <p>Médica especialista em harmonização orofacial, com formação complementar em medicina estética avançada. Atua há 9 anos com foco em resultados naturais e seguros.</p>
+      <p>Cada paciente recebe um plano de tratamento individual, com revisão fotográfica e acompanhamento pós-procedimento.</p>
+      <div class="creds">
+        <div class="c">CRM-MG ativo</div>
+        <div class="c">Pós-graduação em Estética Médica</div>
+        <div class="c">Membro SBME</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="depoimentos">
+  <div class="section-head">
+    <span class="eyebrow">Depoimentos</span>
+    <h2 class="serif">O que dizem nossas <em>pacientes</em>.</h2>
+  </div>
+  <div class="testi-grid">
+    <div class="testi-card">
+      <div class="stars">★★★★★</div>
+      <p class="quote">Fiz preenchimento labial e o resultado ficou extremamente natural. Várias pessoas notaram que eu estava "diferente", mas ninguém adivinhou o que era.</p>
+      <div class="author">
+        <div class="avatar">M</div>
+        <div>
+          <div class="name">Mariana C.</div>
+          <div class="proc">Preenchimento Labial</div>
+        </div>
+      </div>
+    </div>
+    <div class="testi-card">
+      <div class="stars">★★★★★</div>
+      <p class="quote">A avaliação foi minuciosa, sem pressa pra vender procedimento. A Dra. Camila me explicou exatamente o que faria sentido pro meu rosto.</p>
+      <div class="author">
+        <div class="avatar">J</div>
+        <div>
+          <div class="name">Juliana R.</div>
+          <div class="proc">Harmonização Facial</div>
+        </div>
+      </div>
+    </div>
+    <div class="testi-card">
+      <div class="stars">★★★★★</div>
+      <p class="quote">Já fiz botox em outras clínicas antes, mas aqui o cuidado com a simetria foi muito mais perceptível. Recomendo de olhos fechados.</p>
+      <div class="author">
+        <div class="avatar">P</div>
+        <div>
+          <div class="name">Patrícia A.</div>
+          <div class="proc">Toxina Botulínica</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="section-head">
+    <span class="eyebrow">Perguntas Frequentes</span>
+    <h2 class="serif">Tudo que você precisa <em>saber</em>.</h2>
+  </div>
+  <div class="faq-list">
+    <details class="faq-item" open>
+      <summary>O procedimento dói?</summary>
+      <div class="answer">Utilizamos anestésico tópico antes de todos os procedimentos injetáveis. A maioria das pacientes relata desconforto leve, comparável a uma picada superficial.</div>
+    </details>
+    <details class="faq-item">
+      <summary>Quanto tempo dura o resultado do botox?</summary>
+      <div class="answer">Em média, de 4 a 6 meses, variando de acordo com a metabolização individual e a região tratada.</div>
+    </details>
+    <details class="faq-item">
+      <summary>Existe tempo de recuperação?</summary>
+      <div class="answer">Para a maioria dos procedimentos, não há necessidade de afastamento das atividades. Pequenos hematomas podem ocorrer e geralmente somem em poucos dias.</div>
+    </details>
+    <details class="faq-item">
+      <summary>Como funciona a primeira avaliação?</summary>
+      <div class="answer">A avaliação inclui mapeamento facial fotográfico e uma conversa para entender suas expectativas antes de qualquer indicação de procedimento.</div>
+    </details>
+  </div>
+</section>
+
+<section class="cta-final" id="agendar">
+  <div class="eyebrow">Agende sua Avaliação</div>
+  <h2 class="serif">O primeiro passo é uma <em>conversa</em>, não uma agulha.</h2>
+  <p>Vagas limitadas por semana para garantir atendimento individualizado e sem pressa.</p>
+  <a href="#" class="btn-primary">Falar no WhatsApp →</a>
+</section>
+
+<footer>
+  <a href="#" class="logo">Lumière Clínica</a>
+  <div class="meta">Belo Horizonte, MG — Página de demonstração criada para fins de apresentação comercial.</div>
+</footer>
+
+</body>
+</html>

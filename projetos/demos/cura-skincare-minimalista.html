@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Cura Skincare Studio — Tratamentos de Pele</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,400;0,500;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#FAF7F2; --bg-soft:#F1ECE3; --line:#DDD5C7;
+    --ink:#241F19; --ink-dim:#6b6354; --accent:#8A6E4E;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{background:var(--bg);color:var(--ink);font-family:'Inter',sans-serif;line-height:1.7;-webkit-font-smoothing:antialiased}
+  a{color:inherit;text-decoration:none}
+  .serif{font-family:'Fraunces',serif}
+
+  nav{display:flex;justify-content:space-between;align-items:center;padding:2rem 6vw;position:sticky;top:0;background:rgba(250,247,242,0.92);backdrop-filter:blur(8px);z-index:50;border-bottom:1px solid var(--line)}
+  nav .logo{font-family:'Fraunces',serif;font-size:1.3rem;letter-spacing:0.01em}
+  nav .links{display:flex;gap:2.4rem;font-size:0.86rem;color:var(--ink-dim)}
+  nav .links a:hover{color:var(--ink)}
+  nav .cta{font-size:0.84rem;border-bottom:1px solid var(--ink);padding-bottom:0.2rem}
+  @media(max-width:820px){nav .links{display:none}}
+
+  .hero{padding:6rem 6vw 5rem;max-width:1100px;margin:0 auto}
+  .hero .kicker{font-size:0.82rem;color:var(--accent);letter-spacing:0.08em;margin-bottom:1.6rem}
+  .hero h1{font-family:'Fraunces',serif;font-weight:400;font-size:clamp(2.4rem,6vw,4.6rem);line-height:1.08;max-width:780px}
+  .hero h1 em{font-style:italic;color:var(--accent)}
+  .hero-row{display:flex;justify-content:space-between;align-items:flex-end;margin-top:2.5rem;gap:2rem;flex-wrap:wrap}
+  .hero-row p{max-width:380px;color:var(--ink-dim);font-size:1.02rem}
+  .hero-row .btn{font-size:0.9rem;border:1px solid var(--ink);padding:0.95rem 2.1rem;white-space:nowrap;transition:background .2s,color .2s}
+  .hero-row .btn:hover{background:var(--ink);color:var(--bg)}
+
+  .hero-photo{margin-top:3.5rem;height:46vh;min-height:300px;background:url('https://images.unsplash.com/photo-1570172619644-dfd03ed5d881?w:1600&q=80') center/cover;border-radius:2px}
+
+  .marks{display:grid;grid-template-columns:repeat(4,1fr);border-top:1px solid var(--line);border-bottom:1px solid var(--line);max-width:1100px;margin:0 auto}
+  .marks .m{padding:2rem 1.5rem;text-align:center;border-right:1px solid var(--line)}
+  .marks .m:last-child{border-right:none}
+  .marks .m .v{font-family:'Fraunces',serif;font-size:1.7rem;font-style:italic}
+  .marks .m .l{font-size:0.74rem;color:var(--ink-dim);margin-top:0.3rem;letter-spacing:0.03em}
+  @media(max-width:820px){.marks{grid-template-columns:repeat(2,1fr)}.marks .m:nth-child(2n){border-right:none}}
+
+  .section{max-width:1100px;margin:0 auto;padding:6rem 6vw}
+  .section-label{font-size:0.82rem;color:var(--accent);letter-spacing:0.08em;margin-bottom:1.2rem}
+
+  .editorial-grid{display:grid;grid-template-columns:0.8fr 1.2fr;gap:4rem;align-items:start}
+  .editorial-grid h2{font-family:'Fraunces',serif;font-weight:400;font-size:clamp(1.9rem,3.4vw,2.6rem);line-height:1.18}
+  .editorial-grid h2 em{font-style:italic;color:var(--accent)}
+  .service-list{display:flex;flex-direction:column}
+  .service-row{display:flex;justify-content:space-between;align-items:baseline;padding:1.7rem 0;border-bottom:1px solid var(--line);gap:1.5rem}
+  .service-row:first-child{padding-top:0}
+  .service-row .name{font-family:'Fraunces',serif;font-size:1.3rem}
+  .service-row .desc{color:var(--ink-dim);font-size:0.9rem;margin-top:0.35rem;max-width:380px}
+  .service-row .price{font-size:0.92rem;color:var(--ink-dim);white-space:nowrap}
+  @media(max-width:820px){.editorial-grid{grid-template-columns:1fr;gap:2rem}}
+
+  .full-photo{height:62vh;min-height:380px;background:url('https://images.unsplash.com/photo-1556228720-da4e83b67428?w=1600&q=80') center/cover;margin:0 6vw;border-radius:2px;max-width:1100px;margin-left:auto;margin-right:auto}
+
+  .quote-strip{text-align:center;max-width:680px;margin:0 auto;padding:6rem 6vw}
+  .quote-strip p{font-family:'Fraunces',serif;font-size:1.6rem;font-style:italic;line-height:1.45}
+  .quote-strip .who{margin-top:1.5rem;font-size:0.84rem;color:var(--ink-dim)}
+
+  .process-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:2.5rem}
+  .process-step .step-num{font-family:'Fraunces',serif;font-style:italic;font-size:1.1rem;color:var(--accent)}
+  .process-step h3{font-family:'Fraunces',serif;font-size:1.2rem;margin:0.8rem 0 0.6rem}
+  .process-step p{font-size:0.9rem;color:var(--ink-dim)}
+  @media(max-width:820px){.process-grid{grid-template-columns:1fr;gap:2rem}}
+
+  .cta-band{background:var(--bg-soft);text-align:center;padding:6rem 6vw;border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+  .cta-band h2{font-family:'Fraunces',serif;font-weight:400;font-size:clamp(2rem,3.6vw,2.8rem);max-width:600px;margin:0 auto;line-height:1.2}
+  .cta-band h2 em{font-style:italic;color:var(--accent)}
+  .cta-band p{margin:1.2rem auto 2.2rem;color:var(--ink-dim);max-width:420px}
+  .cta-band .btn{display:inline-block;font-size:0.9rem;border:1px solid var(--ink);padding:0.95rem 2.2rem;transition:background .2s,color .2s}
+  .cta-band .btn:hover{background:var(--ink);color:var(--bg)}
+
+  footer{display:flex;justify-content:space-between;align-items:center;padding:3rem 6vw;flex-wrap:wrap;gap:1.5rem;max-width:1100px;margin:0 auto}
+  footer .logo{font-family:'Fraunces',serif;font-size:1.1rem}
+  footer .meta{color:var(--ink-dim);font-size:0.8rem;text-align:right}
+
+  .demo-badge{position:fixed;bottom:1.2rem;right:1.2rem;z-index:60;background:var(--ink);color:var(--bg);font-size:0.7rem;font-weight:600;letter-spacing:0.05em;padding:0.5rem 0.9rem;border-radius:2px}
+
+  @media(max-width:640px){.section{padding:4rem 6vw}.hero{padding:4.5rem 6vw 3.5rem}}
+</style>
+</head>
+<body>
+
+<div class="demo-badge">Página de demonstração</div>
+
+<nav>
+  <a href="#" class="logo">Cura</a>
+  <div class="links">
+    <a href="#tratamentos">Tratamentos</a>
+    <a href="#processo">Processo</a>
+  </div>
+  <a href="#agendar" class="cta">Reservar horário</a>
+</nav>
+
+<section class="hero">
+  <div class="kicker">Skincare Studio · Belo Horizonte</div>
+  <h1 class="serif">Pele saudável é o<br><em>verdadeiro</em> luxo.</h1>
+  <div class="hero-row">
+    <p>Tratamentos faciais personalizados, sem procedimentos invasivos — cuidado contínuo com sua pele, não soluções rápidas.</p>
+    <a href="#agendar" class="btn">Reservar horário</a>
+  </div>
+  <div class="hero-photo"></div>
+</section>
+
+<div class="marks">
+  <div class="m"><div class="v serif">6 anos</div><div class="l">de estúdio</div></div>
+  <div class="m"><div class="v serif">100%</div><div class="l">protocolos personalizados</div></div>
+  <div class="m"><div class="v serif">4.8</div><div class="l">avaliação média</div></div>
+  <div class="m"><div class="v serif">Sem</div><div class="l">procedimentos invasivos</div></div>
+</div>
+
+<section class="section" id="tratamentos">
+  <div class="editorial-grid">
+    <div>
+      <div class="section-label">Tratamentos</div>
+      <h2 class="serif">Protocolos para cada <em>tipo</em> e momento de pele.</h2>
+    </div>
+    <div class="service-list">
+      <div class="service-row">
+        <div><div class="name serif">Limpeza de Pele Profunda</div><div class="desc">Extração + máscara calmante, indicada mensalmente</div></div>
+        <div class="price">R$ 180</div>
+      </div>
+      <div class="service-row">
+        <div><div class="name serif">Peeling de Diamante</div><div class="desc">Renovação celular para textura e luminosidade</div></div>
+        <div class="price">R$ 220</div>
+      </div>
+      <div class="service-row">
+        <div><div class="name serif">Microagulhamento</div><div class="desc">Estímulo de colágeno para cicatrizes e poros</div></div>
+        <div class="price">R$ 350</div>
+      </div>
+      <div class="service-row">
+        <div><div class="name serif">Hidratação Profunda</div><div class="desc">Sessão com ácido hialurônico tópico de alta concentração</div></div>
+        <div class="price">R$ 190</div>
+      </div>
+      <div class="service-row">
+        <div><div class="name serif">Protocolo Anti-idade</div><div class="desc">Combinação de ativos + LED terapia, pacote de 4 sessões</div></div>
+        <div class="price">R$ 890</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="full-photo"></div>
+
+<div class="quote-strip">
+  <p class="serif">"Pela primeira vez sinto que entendo minha pele, em vez de só tentar consertá-la."</p>
+  <div class="who">Beatriz L. — Protocolo Anti-idade</div>
+</div>
+
+<section class="section" id="processo">
+  <div class="section-label">Como funciona</div>
+  <h2 class="serif" style="font-size:clamp(1.9rem,3.4vw,2.6rem);max-width:600px;margin-bottom:3rem">Cuidado pensado em <em>etapas</em>, não em sessões isoladas.</h2>
+  <div class="process-grid">
+    <div class="process-step">
+      <div class="step-num serif">01</div>
+      <h3 class="serif">Diagnóstico de pele</h3>
+      <p>Análise detalhada com lupa digital para entender as reais necessidades da sua pele.</p>
+    </div>
+    <div class="process-step">
+      <div class="step-num serif">02</div>
+      <h3 class="serif">Plano personalizado</h3>
+      <p>Sequência de tratamentos pensada pra sua rotina e objetivo, não um protocolo padrão.</p>
+    </div>
+    <div class="process-step">
+      <div class="step-num serif">03</div>
+      <h3 class="serif">Acompanhamento contínuo</h3>
+      <p>Revisão do plano a cada 3 sessões, ajustando conforme a resposta da sua pele.</p>
+    </div>
+  </div>
+</section>
+
+<section class="cta-band" id="agendar">
+  <h2 class="serif">Comece com um <em>diagnóstico</em> de pele.</h2>
+  <p>Primeira sessão inclui análise completa sem compromisso de pacote.</p>
+  <a href="#" class="btn">Falar no WhatsApp</a>
+</section>
+
+<footer>
+  <a href="#" class="logo">Cura Skincare Studio</a>
+  <div class="meta">Belo Horizonte, MG — Página de demonstração criada para fins de apresentação comercial.</div>
+</footer>
+
+</body>
+</html>

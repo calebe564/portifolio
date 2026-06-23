@@ -1,0 +1,351 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Vértice Estética — Descubra seu Protocolo Ideal</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,600;0,700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#0E0D11; --bg-el:#171620; --bg-card:#1A1925;
+    --border:#2B2A38; --text:#ECEAF5; --text-dim:#a8a5bd; --text-faint:#6f6c87;
+    --violet:#9D7FE8; --violet-bright:#B89FF5; --violet-dim:#5C4A93;
+    --cyan:#6FE0D4;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{background:var(--bg);color:var(--text);font-family:'Inter',sans-serif;line-height:1.6;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+  a{color:inherit;text-decoration:none}
+  .serif{font-family:'Playfair Display',serif}
+  button{font-family:inherit;cursor:pointer;border:none;background:none;color:inherit}
+
+  nav{position:fixed;top:0;left:0;right:0;z-index:50;display:flex;justify-content:space-between;align-items:center;padding:1.4rem 5vw;background:rgba(14,13,17,0.7);backdrop-filter:blur(10px);border-bottom:1px solid rgba(255,255,255,0.06)}
+  nav .logo{font-family:'Playfair Display',serif;font-size:1.3rem;color:var(--violet-bright)}
+  nav .links{display:flex;gap:2.2rem;font-size:0.85rem}
+  nav .links a{color:var(--text-dim);transition:color .2s}
+  nav .links a:hover{color:var(--violet-bright)}
+  nav .cta-nav{background:var(--violet);color:#100f17;padding:0.6rem 1.4rem;border-radius:100px;font-size:0.82rem;font-weight:600}
+  @media(max-width:880px){nav .links{display:none}}
+
+  .hero{min-height:92vh;display:flex;align-items:center;padding:7rem 5vw 3rem;position:relative;overflow:hidden}
+  .hero::before{content:'';position:absolute;top:-20%;right:-10%;width:60%;height:140%;
+    background:radial-gradient(circle, rgba(157,127,232,0.18), transparent 65%);pointer-events:none}
+  .hero-inner{max-width:620px;position:relative;z-index:2}
+  .hero .eyebrow{display:flex;align-items:center;gap:0.7rem;color:var(--cyan);font-size:0.78rem;letter-spacing:0.18em;text-transform:uppercase;margin-bottom:1.5rem}
+  .hero .eyebrow::before{content:'';width:8px;height:8px;border-radius:50%;background:var(--cyan)}
+  .hero h1{font-size:clamp(2.4rem,5.2vw,4rem);font-weight:600;line-height:1.1}
+  .hero h1 em{font-style:italic;color:var(--violet-bright)}
+  .hero p.lede{margin-top:1.5rem;font-size:1.05rem;color:var(--text-dim);max-width:460px}
+  .hero-ctas{margin-top:2.3rem;display:flex;gap:1rem;flex-wrap:wrap}
+  .btn-primary{background:var(--violet);color:#100f17;padding:0.95rem 2rem;border-radius:100px;font-weight:600;font-size:0.9rem;transition:background .2s,transform .2s}
+  .btn-primary:hover{background:var(--violet-bright);transform:translateY(-2px)}
+  .btn-secondary{border:1px solid var(--border);padding:0.95rem 2rem;border-radius:100px;font-size:0.9rem;transition:border-color .2s}
+  .btn-secondary:hover{border-color:var(--violet-dim)}
+
+  .section{padding:6rem 5vw;max-width:1180px;margin:0 auto}
+  .section-head{max-width:600px;margin-bottom:3rem}
+  .section-head .eyebrow{color:var(--cyan);font-size:0.78rem;letter-spacing:0.18em;text-transform:uppercase;margin-bottom:1rem;display:block}
+  .section-head h2{font-family:'Playfair Display',serif;font-size:clamp(1.9rem,3.2vw,2.6rem);font-weight:600}
+  .section-head h2 em{color:var(--violet-bright);font-style:italic}
+  .section-head p{margin-top:1rem;color:var(--text-dim)}
+
+  /* ===== SLIDER ANTES/DEPOIS ===== */
+  .compare-wrap{
+    max-width:780px;margin:0 auto;
+    border-radius:14px;overflow:hidden;border:1px solid var(--border);
+    position:relative;user-select:none;
+  }
+  .compare{
+    position:relative; width:100%; aspect-ratio:4/3; overflow:hidden;
+  }
+  .compare img{
+    position:absolute; inset:0; width:100%; height:100%; object-fit:cover;
+  }
+  .compare .after-img{ clip-path:inset(0 0 0 50%); }
+  .compare .divider{
+    position:absolute; top:0; bottom:0; left:50%; width:3px; background:var(--violet-bright);
+    transform:translateX(-50%); pointer-events:none; box-shadow:0 0 14px rgba(157,127,232,0.7);
+  }
+  .compare .handle{
+    position:absolute; top:50%; left:50%; transform:translate(-50%,-50%);
+    width:46px;height:46px;border-radius:50%;background:var(--violet-bright);
+    display:flex;align-items:center;justify-content:center;color:#100f17;font-size:1.1rem;font-weight:700;
+    pointer-events:none; box-shadow:0 4px 18px rgba(0,0,0,0.4);
+  }
+  .compare-labels{display:flex;justify-content:space-between;padding:0.9rem 1.3rem;background:var(--bg-el);font-size:0.78rem;letter-spacing:0.08em;text-transform:uppercase;color:var(--text-faint)}
+  .compare input[type=range]{
+    position:absolute; inset:0; width:100%; height:100%; margin:0; opacity:0; cursor:ew-resize;
+  }
+
+  /* ===== TREATMENT QUIZ ===== */
+  .quiz-card{
+    max-width:680px;margin:0 auto;background:var(--bg-card);border:1px solid var(--border);
+    border-radius:14px;padding:2.6rem;
+  }
+  .quiz-step{display:none}
+  .quiz-step.active{display:block}
+  .quiz-q{font-family:'Playfair Display',serif;font-size:1.3rem;margin-bottom:1.5rem}
+  .quiz-options{display:flex;flex-direction:column;gap:0.8rem}
+  .quiz-opt{
+    text-align:left;border:1px solid var(--border);border-radius:8px;padding:1rem 1.3rem;
+    font-size:0.95rem;transition:border-color .2s,background .2s;
+  }
+  .quiz-opt:hover{border-color:var(--violet-dim);background:rgba(157,127,232,0.06)}
+  .quiz-progress{display:flex;gap:0.4rem;margin-bottom:2rem}
+  .quiz-progress .bar{flex:1;height:4px;border-radius:2px;background:var(--border)}
+  .quiz-progress .bar.done{background:var(--violet)}
+  .quiz-result{text-align:center}
+  .quiz-result .label{color:var(--cyan);font-size:0.78rem;letter-spacing:0.15em;text-transform:uppercase;margin-bottom:1rem}
+  .quiz-result h3{font-family:'Playfair Display',serif;font-size:1.7rem;margin-bottom:1rem}
+  .quiz-result p{color:var(--text-dim);margin-bottom:1.8rem}
+  .quiz-restart{font-size:0.85rem;color:var(--text-faint);text-decoration:underline;margin-top:1rem;display:inline-block}
+
+  /* ===== PROCEDIMENTOS FLIP CARDS ===== */
+  .flip-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.3rem}
+  .flip-card{
+    background:var(--bg-card);border:1px solid var(--border);border-radius:12px;
+    padding:2rem 1.6rem;cursor:pointer;transition:border-color .25s,transform .25s;position:relative;min-height:200px;
+  }
+  .flip-card:hover{border-color:var(--violet-dim);transform:translateY(-3px)}
+  .flip-card .icon{font-size:1.7rem;margin-bottom:1rem}
+  .flip-card h3{font-family:'Playfair Display',serif;font-size:1.2rem;margin-bottom:0.6rem}
+  .flip-card p.short{color:var(--text-dim);font-size:0.88rem}
+  .flip-card .more{display:none;margin-top:1rem;padding-top:1rem;border-top:1px solid var(--border);font-size:0.85rem;color:var(--violet-bright)}
+  .flip-card.open .more{display:block}
+  .flip-card .tap{font-size:0.74rem;color:var(--text-faint);margin-top:0.8rem;letter-spacing:0.04em}
+  @media(max-width:880px){.flip-grid{grid-template-columns:1fr}}
+
+  .cta-final{position:relative;text-align:center;padding:7rem 5vw;border-top:1px solid var(--border);overflow:hidden}
+  .cta-final::before{content:'';position:absolute;inset:0;background:radial-gradient(circle at 50% 30%, rgba(157,127,232,0.14), transparent 60%)}
+  .cta-final .inner{position:relative;z-index:2}
+  .cta-final .eyebrow{color:var(--cyan);font-size:0.78rem;letter-spacing:0.18em;text-transform:uppercase;margin-bottom:1.2rem}
+  .cta-final h2{font-family:'Playfair Display',serif;font-size:clamp(2.1rem,3.8vw,3rem);max-width:680px;margin:0 auto;line-height:1.2;font-weight:600}
+  .cta-final h2 em{color:var(--violet-bright);font-style:italic}
+  .cta-final p{margin:1.2rem auto 2.2rem;color:var(--text-dim);max-width:460px}
+
+  footer{padding:3rem 5vw;border-top:1px solid var(--border);display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:1.5rem}
+  footer .logo{font-family:'Playfair Display',serif;color:var(--violet-bright);font-size:1.1rem}
+  footer .meta{color:var(--text-faint);font-size:0.8rem;text-align:right}
+
+  .demo-badge{position:fixed;bottom:1.2rem;right:1.2rem;z-index:60;background:rgba(157,127,232,0.95);color:#100f17;font-size:0.7rem;font-weight:700;letter-spacing:0.05em;padding:0.5rem 0.9rem;border-radius:6px;text-transform:uppercase}
+
+  @media(max-width:640px){.section{padding:4.5rem 6vw}.flip-card{min-height:auto}}
+</style>
+</head>
+<body>
+
+<div class="demo-badge">Página de demonstração</div>
+
+<nav>
+  <a href="#" class="logo">Vértice</a>
+  <div class="links">
+    <a href="#resultados">Resultados</a>
+    <a href="#quiz">Descubra seu protocolo</a>
+    <a href="#procedimentos">Procedimentos</a>
+  </div>
+  <a href="#agendar" class="cta-nav">Agendar</a>
+</nav>
+
+<section class="hero">
+  <div class="hero-inner">
+    <div class="eyebrow">Estética Avançada · Belo Horizonte</div>
+    <h1 class="serif">Descubra <em>qual</em> protocolo é certo pra você.</h1>
+    <p class="lede">Responda 3 perguntas rápidas e receba uma recomendação personalizada — ou arraste o slider abaixo e veja resultados reais.</p>
+    <div class="hero-ctas">
+      <a href="#quiz" class="btn-primary">Fazer o quiz →</a>
+      <a href="#resultados" class="btn-secondary">Ver resultados</a>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="resultados">
+  <div class="section-head">
+    <span class="eyebrow">Arraste para comparar</span>
+    <h2 class="serif">Antes e <em>depois</em> reais.</h2>
+    <p>Resultado de protocolo de harmonização facial após 60 dias.</p>
+  </div>
+  <div class="compare-wrap">
+    <div class="compare" id="compareBox">
+      <img class="before-img" src="https://images.unsplash.com/photo-1616683693504-3ea7e9ad6fec?w=900&q=60&sat=-100" alt="Antes">
+      <img class="after-img" id="afterImg" src="https://images.unsplash.com/photo-1616683693504-3ea7e9ad6fec?w=900&q=80" alt="Depois">
+      <div class="divider" id="divider"></div>
+      <div class="handle" id="handle">↔</div>
+      <input type="range" min="0" max="100" value="50" id="compareSlider">
+    </div>
+    <div class="compare-labels"><span>Antes</span><span>Depois — arraste</span></div>
+  </div>
+</section>
+
+<section class="section" id="quiz">
+  <div class="section-head">
+    <span class="eyebrow">Quiz Rápido</span>
+    <h2 class="serif">Qual protocolo combina com <em>você</em>?</h2>
+    <p>3 perguntas, 30 segundos, recomendação personalizada.</p>
+  </div>
+  <div class="quiz-card">
+    <div class="quiz-progress">
+      <div class="bar" data-step="1"></div>
+      <div class="bar" data-step="2"></div>
+      <div class="bar" data-step="3"></div>
+    </div>
+
+    <div class="quiz-step active" data-step="1">
+      <div class="quiz-q">O que mais te incomoda hoje?</div>
+      <div class="quiz-options">
+        <button class="quiz-opt" data-val="linhas">Linhas de expressão (testa, olhos)</button>
+        <button class="quiz-opt" data-val="volume">Perda de volume facial</button>
+        <button class="quiz-opt" data-val="pele">Textura e viço da pele</button>
+        <button class="quiz-opt" data-val="contorno">Contorno do rosto / mandíbula</button>
+      </div>
+    </div>
+
+    <div class="quiz-step" data-step="2">
+      <div class="quiz-q">Você já fez algum procedimento estético antes?</div>
+      <div class="quiz-options">
+        <button class="quiz-opt" data-val="nunca">Nunca, seria minha primeira vez</button>
+        <button class="quiz-opt" data-val="poucas">Já fiz 1 ou 2 vezes</button>
+        <button class="quiz-opt" data-val="frequente">Faço manutenção regularmente</button>
+      </div>
+    </div>
+
+    <div class="quiz-step" data-step="3">
+      <div class="quiz-q">O que é mais importante pra você agora?</div>
+      <div class="quiz-options">
+        <button class="quiz-opt" data-val="natural">Resultado discreto e natural</button>
+        <button class="quiz-opt" data-val="rapido">Recuperação rápida, sem afastamento</button>
+        <button class="quiz-opt" data-val="duravel">Durabilidade do resultado</button>
+      </div>
+    </div>
+
+    <div class="quiz-step" data-step="result">
+      <div class="quiz-result">
+        <div class="label">Sua recomendação</div>
+        <h3 class="serif" id="resultTitle">—</h3>
+        <p id="resultDesc">—</p>
+        <a href="#agendar" class="btn-primary">Agendar avaliação →</a>
+        <br>
+        <a href="#" class="quiz-restart" id="restartBtn">Refazer o quiz</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="procedimentos">
+  <div class="section-head">
+    <span class="eyebrow">Procedimentos</span>
+    <h2 class="serif">Toque para <em>saber</em> mais.</h2>
+  </div>
+  <div class="flip-grid">
+    <div class="flip-card" data-card>
+      <div class="icon">✦</div>
+      <h3 class="serif">Botox</h3>
+      <p class="short">Suaviza linhas de expressão com resultado natural.</p>
+      <div class="more">Indicado para testa, glabela e pés de galinha. Resultado em até 7 dias, dura de 4 a 6 meses. Sessão dura cerca de 30 minutos.</div>
+      <div class="tap">Toque para detalhes ↓</div>
+    </div>
+    <div class="flip-card" data-card>
+      <div class="icon">◆</div>
+      <h3 class="serif">Preenchimento</h3>
+      <p class="short">Devolve volume facial perdido com ácido hialurônico.</p>
+      <div class="more">Aplicado em bochechas, lábios ou olheiras. Resultado imediato, dura de 8 a 14 meses dependendo da região tratada.</div>
+      <div class="tap">Toque para detalhes ↓</div>
+    </div>
+    <div class="flip-card" data-card>
+      <div class="icon">●</div>
+      <h3 class="serif">Bioestimulador</h3>
+      <p class="short">Estimula produção natural de colágeno da pele.</p>
+      <div class="more">Resultado progressivo ao longo de 60-90 dias. Indicado para flacidez leve e melhora geral da qualidade da pele.</div>
+      <div class="tap">Toque para detalhes ↓</div>
+    </div>
+  </div>
+</section>
+
+<section class="cta-final" id="agendar">
+  <div class="inner">
+    <div class="eyebrow">Próximo Passo</div>
+    <h2 class="serif">Sua avaliação <em>personalizada</em> começa aqui.</h2>
+    <p>Vagas limitadas por semana — agende com antecedência.</p>
+    <a href="#" class="btn-primary">Agendar pelo WhatsApp</a>
+  </div>
+</section>
+
+<footer>
+  <a href="#" class="logo">Vértice Estética</a>
+  <div class="meta">Belo Horizonte, MG — Página de demonstração criada para fins de apresentação comercial.</div>
+</footer>
+
+<script>
+  // Slider antes/depois
+  const slider = document.getElementById('compareSlider');
+  const afterImg = document.getElementById('afterImg');
+  const divider = document.getElementById('divider');
+  const handle = document.getElementById('handle');
+
+  function updateCompare(val){
+    afterImg.style.clipPath = `inset(0 0 0 ${val}%)`;
+    divider.style.left = val + '%';
+    handle.style.left = val + '%';
+  }
+  slider.addEventListener('input', (e) => updateCompare(e.target.value));
+  updateCompare(50);
+
+  // Quiz
+  const steps = ['1','2','3','result'];
+  let currentStep = 0;
+  const answers = {};
+
+  function showStep(index){
+    document.querySelectorAll('.quiz-step').forEach(el => el.classList.remove('active'));
+    document.querySelector(`.quiz-step[data-step="${steps[index]}"]`).classList.add('active');
+    document.querySelectorAll('.quiz-progress .bar').forEach((bar, i) => {
+      bar.classList.toggle('done', i < index);
+    });
+  }
+
+  document.querySelectorAll('.quiz-opt').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const stepEl = btn.closest('.quiz-step');
+      const stepNum = stepEl.dataset.step;
+      answers[stepNum] = btn.dataset.val;
+      currentStep++;
+      if(currentStep < steps.length - 1){
+        showStep(currentStep);
+      } else {
+        currentStep = steps.length - 1;
+        showResult();
+        showStep(currentStep);
+      }
+    });
+  });
+
+  function showResult(){
+    const concern = answers['1'];
+    let title, desc;
+    if(concern === 'linhas'){
+      title = 'Toxina Botulínica (Botox)';
+      desc = 'Pelo seu perfil, o Botox é o ponto de partida ideal: suaviza linhas de expressão com resultado natural e recuperação imediata.';
+    } else if(concern === 'volume'){
+      title = 'Preenchimento Facial';
+      desc = 'Recomendamos preenchimento com ácido hialurônico para devolver volume de forma equilibrada e harmônica ao seu rosto.';
+    } else if(concern === 'pele'){
+      title = 'Skinbooster + Bioestimulador';
+      desc = 'Pra textura e viço da pele, a combinação de skinbooster com bioestimulador de colágeno traz resultado progressivo e natural.';
+    } else {
+      title = 'Harmonização Facial Completa';
+      desc = 'Pra reequilibrar o contorno facial, um protocolo combinado costuma trazer o resultado mais consistente. Vamos avaliar seu caso com calma.';
+    }
+    document.getElementById('resultTitle').textContent = title;
+    document.getElementById('resultDesc').textContent = desc;
+  }
+
+  document.getElementById('restartBtn').addEventListener('click', (e) => {
+    e.preventDefault();
+    currentStep = 0;
+    for(const k in answers) delete answers[k];
+    showStep(0);
+  });
+</script>
+
+</body>
+</html>
