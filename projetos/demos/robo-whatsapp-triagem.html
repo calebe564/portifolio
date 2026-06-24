@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Robô de Atendimento WhatsApp — Demonstração</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,600;0,700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#0E0D11; --bg-el:#171620; --bg-card:#1A1925;
+    --border:#2B2A38; --text:#ECEAF5; --text-dim:#a8a5bd; --text-faint:#6f6c87;
+    --violet:#9D7FE8; --violet-bright:#B89FF5;
+    --wa-bg:#0B141A; --wa-out:#005C4B; --wa-in:#202C33; --wa-header:#202C33;
+    --wa-text:#E9EDEF; --wa-time:#8696A0; --wa-check:#53BDEB;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{background:var(--bg);color:var(--text);font-family:'Inter',sans-serif;line-height:1.5;-webkit-font-smoothing:antialiased}
+  a{color:inherit;text-decoration:none}
+  .serif{font-family:'Playfair Display',serif}
+
+  .page{max-width:1100px;margin:0 auto;padding:4rem 5vw 5rem}
+
+  .top{text-align:center;max-width:640px;margin:0 auto 3rem}
+  .top .eyebrow{display:inline-flex;align-items:center;gap:0.6rem;color:#6FE0D4;font-size:0.78rem;letter-spacing:0.16em;text-transform:uppercase;margin-bottom:1.4rem}
+  .top .eyebrow::before{content:'';width:8px;height:8px;border-radius:50%;background:#6FE0D4}
+  .top h1{font-family:'Playfair Display',serif;font-weight:600;font-size:clamp(1.9rem,4vw,2.7rem);line-height:1.18}
+  .top h1 em{color:var(--violet-bright);font-style:italic}
+  .top p{margin-top:1rem;color:var(--text-dim);font-size:1.02rem}
+
+  .layout{display:grid;grid-template-columns:340px 1fr;gap:3rem;align-items:start}
+
+  .phone-wrap{display:flex;justify-content:center}
+  .phone{
+    width:320px;background:#000;border-radius:36px;padding:10px;
+    box-shadow:0 30px 60px rgba(0,0,0,0.5);
+  }
+  .screen{
+    background:var(--wa-bg);border-radius:28px;overflow:hidden;height:600px;
+    display:flex;flex-direction:column;position:relative;
+  }
+  .notch{position:absolute;top:0;left:50%;transform:translateX(-50%);width:120px;height:22px;background:#000;border-radius:0 0 14px 14px;z-index:5}
+
+  .wa-header{
+    background:var(--wa-header);padding:14px 16px 12px;display:flex;align-items:center;gap:10px;
+    padding-top:28px;flex-shrink:0;
+  }
+  .wa-back{color:var(--wa-time);font-size:18px}
+  .wa-avatar{width:36px;height:36px;border-radius:50%;background:linear-gradient(135deg,#9D7FE8,#5C4A93);display:flex;align-items:center;justify-content:center;font-family:'Playfair Display',serif;font-weight:600;color:#fff;font-size:15px;flex-shrink:0}
+  .wa-info{flex:1;min-width:0}
+  .wa-name{color:var(--wa-text);font-size:14.5px;font-weight:600}
+  .wa-status{color:var(--wa-time);font-size:12px;margin-top:1px}
+  .wa-icons{display:flex;gap:14px;color:var(--wa-time);font-size:16px}
+
+  .wa-body{
+    flex:1;overflow-y:auto;padding:14px 10px;display:flex;flex-direction:column;gap:2px;
+  }
+  .wa-date{
+    align-self:center;background:#182229;color:var(--wa-time);font-size:11.5px;
+    padding:4px 10px;border-radius:7px;margin:6px 0 10px;
+  }
+
+  .msg-row{display:flex;opacity:0;transform:translateY(8px);animation:msgIn 0.35s ease forwards}
+  .msg-row.in{justify-content:flex-start}
+  .msg-row.out{justify-content:flex-end}
+  @keyframes msgIn{to{opacity:1;transform:translateY(0)}}
+
+  .bubble{
+    max-width:78%;padding:7px 9px 8px 10px;border-radius:8px;font-size:13.6px;line-height:1.35;
+    position:relative;margin-bottom:6px;color:var(--wa-text);
+  }
+  .msg-row.in .bubble{background:var(--wa-in);border-top-left-radius:2px}
+  .msg-row.out .bubble{background:var(--wa-out);border-top-right-radius:2px}
+  .bubble .meta{display:flex;justify-content:flex-end;gap:3px;margin-top:3px;font-size:10.5px;color:var(--wa-time)}
+  .msg-row.out .bubble .meta .check{color:var(--wa-check)}
+
+  .btn-msg{
+    background:var(--wa-in);border-top:1px solid rgba(255,255,255,0.08);
+    color:#6FE0D4;text-align:center;padding:9px;font-size:13.5px;font-weight:500;
+    border-radius:0 0 8px 8px;margin-top:-6px;margin-bottom:6px;max-width:78%;
+  }
+
+  .typing-row{opacity:0;animation:msgIn 0.3s ease forwards}
+  .typing-bubble{
+    background:var(--wa-in);border-radius:8px;border-top-left-radius:2px;
+    padding:10px 14px;display:inline-flex;gap:4px;align-items:center;
+  }
+  .typing-bubble span{width:6px;height:6px;border-radius:50%;background:var(--wa-time);animation:tdot 1.2s infinite}
+  .typing-bubble span:nth-child(2){animation-delay:0.2s}
+  .typing-bubble span:nth-child(3){animation-delay:0.4s}
+  @keyframes tdot{0%,60%,100%{opacity:0.3;transform:translateY(0)}30%{opacity:1;transform:translateY(-3px)}}
+
+  .wa-inputbar{
+    background:var(--wa-header);padding:8px 10px;display:flex;align-items:center;gap:8px;flex-shrink:0;
+  }
+  .wa-inputbar .field{flex:1;background:#2A3942;border-radius:20px;padding:9px 14px;color:var(--wa-time);font-size:13px}
+  .wa-inputbar .mic{width:34px;height:34px;border-radius:50%;background:var(--wa-out);display:flex;align-items:center;justify-content:center;color:#fff;font-size:15px;flex-shrink:0}
+
+  .restart-row{display:flex;justify-content:center;margin-top:1.4rem}
+  .restart-btn{
+    background:var(--bg-card);border:1px solid var(--border);color:var(--text-dim);
+    font-size:0.85rem;padding:0.6rem 1.3rem;border-radius:100px;cursor:pointer;
+    display:flex;align-items:center;gap:0.5rem;transition:border-color .2s,color .2s;
+  }
+  .restart-btn:hover{border-color:var(--violet-bright);color:var(--violet-bright)}
+
+  .side{display:flex;flex-direction:column;gap:1.3rem}
+  .side h2{font-family:'Playfair Display',serif;font-size:1.5rem;font-weight:600;margin-bottom:0.4rem}
+  .side > p.lede{color:var(--text-dim);margin-bottom:0.6rem}
+
+  .step-card{
+    background:var(--bg-card);border:1px solid var(--border);border-radius:12px;
+    padding:1.3rem 1.4rem;transition:border-color .3s,background .3s;
+  }
+  .step-card.active{border-color:var(--violet-bright);background:rgba(157,127,232,0.06)}
+  .step-card .stepnum{font-family:'Playfair Display',serif;font-style:italic;color:var(--violet-bright);font-size:0.95rem;margin-bottom:0.4rem}
+  .step-card h3{font-size:1.02rem;font-weight:600;margin-bottom:0.4rem}
+  .step-card p{font-size:0.88rem;color:var(--text-dim)}
+
+  .cta-box{
+    margin-top:0.8rem;background:linear-gradient(135deg,rgba(157,127,232,0.1),rgba(111,224,212,0.06));
+    border:1px solid var(--border);border-radius:14px;padding:1.6rem;
+  }
+  .cta-box h3{font-family:'Playfair Display',serif;font-size:1.2rem;margin-bottom:0.5rem}
+  .cta-box p{color:var(--text-dim);font-size:0.9rem;margin-bottom:1.1rem}
+  .cta-box .btn{display:inline-flex;background:var(--violet-bright);color:#100f17;padding:0.75rem 1.5rem;border-radius:100px;font-weight:600;font-size:0.88rem}
+
+  .demo-badge{position:fixed;bottom:1.2rem;right:1.2rem;z-index:60;background:rgba(157,127,232,0.95);color:#100f17;font-size:0.7rem;font-weight:700;letter-spacing:0.05em;padding:0.5rem 0.9rem;border-radius:6px;text-transform:uppercase}
+
+  @media(max-width:880px){
+    .layout{grid-template-columns:1fr}
+    .phone-wrap{margin-bottom:1rem}
+  }
+</style>
+</head>
+<body>
+
+<div class="demo-badge">Página de demonstração</div>
+
+<div class="page">
+  <div class="top">
+    <span class="eyebrow">Robô de atendimento · WhatsApp</span>
+    <h1 class="serif">Triagem automática <em>antes</em> do humano.</h1>
+    <p>Simulação de conversa real: o paciente é recebido, direcionado e qualificado automaticamente — você só entra quando faz sentido.</p>
+  </div>
+
+  <div class="layout">
+    <div class="phone-wrap">
+      <div class="phone">
+        <div class="screen">
+          <div class="notch"></div>
+          <div class="wa-header">
+            <span class="wa-back">‹</span>
+            <div class="wa-avatar">LC</div>
+            <div class="wa-info">
+              <div class="wa-name">Lumière Clínica</div>
+              <div class="wa-status" id="waStatus">online</div>
+            </div>
+            <div class="wa-icons"><span>⋮</span></div>
+          </div>
+          <div class="wa-body" id="waBody">
+            <div class="wa-date">Hoje</div>
+          </div>
+          <div class="wa-inputbar">
+            <div class="field">Mensagem</div>
+            <div class="mic">🎤</div>
+          </div>
+        </div>
+      </div>
+      <div class="restart-row">
+        <button class="restart-btn" id="restartBtn"><span>↻</span> Reiniciar simulação</button>
+      </div>
+    </div>
+
+    <div class="side">
+      <h2 class="serif">Como funciona</h2>
+      <p class="lede">Cada etapa da conversa acontece sem intervenção humana, até o momento certo de te avisar.</p>
+
+      <div class="step-card" data-step="0">
+        <div class="stepnum">01</div>
+        <h3>Boas-vindas automática</h3>
+        <p>O paciente manda qualquer mensagem e recebe acolhimento imediato, 24 horas por dia.</p>
+      </div>
+      <div class="step-card" data-step="1">
+        <div class="stepnum">02</div>
+        <h3>Menu de direcionamento</h3>
+        <p>Botões guiam o paciente: agendar consulta, dúvidas frequentes ou outro assunto.</p>
+      </div>
+      <div class="step-card" data-step="2">
+        <div class="stepnum">03</div>
+        <h3>Coleta de dados</h3>
+        <p>Nome, procedimento de interesse e melhor horário de contato, sem digitação manual da recepção.</p>
+      </div>
+      <div class="step-card" data-step="3">
+        <div class="stepnum">04</div>
+        <h3>Você é avisado</h3>
+        <p>O lead cai direto na sua planilha, e você recebe a notificação pra fechar o atendimento.</p>
+      </div>
+
+      <div class="cta-box">
+        <h3 class="serif">Quer isso na sua clínica?</h3>
+        <p>Configuração feita sob medida com seus procedimentos, horários e fluxo de agendamento.</p>
+        <a href="https://wa.me/5531998111601" target="_blank" rel="noopener" class="btn">Falar no WhatsApp →</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  const script = [
+    { type: 'in',  text: 'Oi, boa tarde! Vi o Instagram de vocês', step: 0 },
+    { type: 'typing' },
+    { type: 'out', text: 'Olá! 👋 Bem-vindo(a) à Lumière Clínica Estética. Como posso te ajudar hoje?', step: 0 },
+    { type: 'out_btn', text: 'Agendar consulta' },
+    { type: 'out_btn', text: 'Dúvidas frequentes' },
+    { type: 'out_btn', text: 'Outro assunto' },
+    { type: 'in',  text: 'Agendar consulta', step: 1 },
+    { type: 'typing' },
+    { type: 'out', text: 'Perfeito! Pra te ajudar melhor, qual o seu nome completo?', step: 1 },
+    { type: 'in',  text: 'Renata Souza', step: 2 },
+    { type: 'typing' },
+    { type: 'out', text: 'Prazer, Renata! E qual procedimento te interessa? (ex: botox, preenchimento, harmonização)', step: 2 },
+    { type: 'in',  text: 'Queria saber sobre preenchimento labial', step: 2 },
+    { type: 'typing' },
+    { type: 'out', text: 'Ótimo! Qual o melhor horário pra nossa equipe te ligar e confirmar os detalhes?', step: 2 },
+    { type: 'in',  text: 'Pode ser de manhã, tipo 9h-11h', step: 3 },
+    { type: 'typing' },
+    { type: 'out', text: 'Show! Já registrei seu contato aqui 📋 Nossa equipe vai te chamar nesse horário pra fechar os detalhes. Te vemos em breve! 💛', step: 3 },
+  ];
+
+  const waBody = document.getElementById('waBody');
+  const waStatus = document.getElementById('waStatus');
+  const stepCards = document.querySelectorAll('.step-card');
+  let idx = 0;
+  let timer = null;
+
+  function setActiveStep(step){
+    if(step === undefined) return;
+    stepCards.forEach(c => c.classList.toggle('active', Number(c.dataset.step) === step));
+  }
+
+  function renderNext(){
+    if(idx >= script.length){
+      timer = setTimeout(() => { resetSim(); }, 2600);
+      return;
+    }
+    const item = script[idx];
+
+    if(item.type === 'typing'){
+      waStatus.textContent = 'digitando...';
+      const row = document.createElement('div');
+      row.className = 'msg-row in typing-row';
+      row.innerHTML = '<div class="typing-bubble"><span></span><span></span><span></span></div>';
+      row.id = 'tmpTyping';
+      waBody.appendChild(row);
+      waBody.scrollTop = waBody.scrollHeight;
+      idx++;
+      timer = setTimeout(() => {
+        const t = document.getElementById('tmpTyping');
+        if(t) t.remove();
+        waStatus.textContent = 'online';
+        renderNext();
+      }, 1100);
+      return;
+    }
+
+    if(item.type === 'out_btn'){
+      const row = document.createElement('div');
+      row.className = 'msg-row in';
+      row.style.marginTop = '-4px';
+      row.innerHTML = '<div class="btn-msg">' + item.text + '</div>';
+      waBody.appendChild(row);
+      waBody.scrollTop = waBody.scrollHeight;
+      idx++;
+      timer = setTimeout(renderNext, 420);
+      return;
+    }
+
+    const row = document.createElement('div');
+    row.className = 'msg-row ' + (item.type === 'in' ? 'in' : 'out');
+    const now = new Date();
+    const hh = String(now.getHours()).padStart(2,'0');
+    const mm = String(now.getMinutes()).padStart(2,'0');
+    const checks = item.type === 'out' ? '<span class="check">✓✓</span>' : '';
+    row.innerHTML = '<div class="bubble">' + item.text +
+      '<div class="meta">' + hh + ':' + mm + checks + '</div></div>';
+    waBody.appendChild(row);
+    waBody.scrollTop = waBody.scrollHeight;
+    setActiveStep(item.step);
+    idx++;
+    timer = setTimeout(renderNext, item.type === 'in' ? 900 : 1500);
+  }
+
+  function resetSim(){
+    clearTimeout(timer);
+    waBody.innerHTML = '<div class="wa-date">Hoje</div>';
+    waStatus.textContent = 'online';
+    idx = 0;
+    stepCards.forEach(c => c.classList.remove('active'));
+    timer = setTimeout(renderNext, 600);
+  }
+
+  document.getElementById('restartBtn').addEventListener('click', resetSim);
+
+  resetSim();
+</script>
+
+</body>
+</html>
